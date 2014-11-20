@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BBClient" default="dist" basedir=".">
+    <description>
+        Build file for brndbotclient.jar
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="classes" location="classes"/>
+  <property name="dist"  location="dist"/>
+
+
+  
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${dist}"/>
+    <mkdir dir="${classes}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${classes} -->
+    <javac srcdir="${src}" destdir="${classes}" debug="true" includeantruntime="false">
+    </javac>
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the jar" >
+    <jar destfile="${dist}/brndbotclient.jar"
+           basedir="${classes}">
+      <manifest>
+        <attribute name="Implementation-Title" value="brndbotclient"/>
+        <attribute name="Implementation-Version" value="${TODAY}"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${dist}"/>
+    <delete dir="${classes}"/>
+  </target>
+</project>
