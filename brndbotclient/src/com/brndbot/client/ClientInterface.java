@@ -17,5 +17,5 @@ import java.util.Map;
  *  Should there be a Request and Response object class?
  */
 public interface ClientInterface {
-	public Map<String, Object> issueRequest(Map<String, Object> requestData) ;
+	public ClientResponse issueRequest(ClientRequest cr) ;
 }

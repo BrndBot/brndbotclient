@@ -1,13 +1,35 @@
 package com.brndbot.client;
 
+import java.util.HashMap;
+import java.util.Map;
 
-/** The ClientResponse class encapsulates a request for a client's 
+
+/** The ClientRequest class encapsulates a request for a client's 
  *  data. It's intended to be very flexible.
  */
-public abstract class ClientRequest {
+public class ClientRequest {
 
-	public abstract void setRequestType (String typ);
+	private String requestType;
+	private Map<String, Object> params;
 	
-	public abstract void setParameter (String key, Object val);
+	public ClientRequest(String typ) {
+		requestType = typ;
+		params = new HashMap<String,Object> ();
+	}
+	
+	public void setParameter (String key, Object val) {
+		params.put(key, val);
+	}
+	
+	public Map<String, Object> getParameterMap () {
+		return params;
+	}
+	
+	public Object getParameter(String key) {
+		return params.get(key);
+	}
 
+	public String getRequestType () {
+		return requestType;
+	}
 }
