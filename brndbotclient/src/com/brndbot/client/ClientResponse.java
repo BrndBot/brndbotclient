@@ -20,6 +20,13 @@ public abstract class ClientResponse {
 	
 	/** Returns a Map representing the response in a consistent way.
 	 *  The value may be any data type, with the restriction that
-	 *  if it's a Map, its keys should be Strings. */
-	public abstract Map<String, Object> getResponseAsMap();
+	 *  if it's a Map, its keys should be Strings.
+	 *  
+	 *   TODO Do we really need this, or is getParameter by itself better?
+	 */
+	public abstract Map<String, Object> getParameters();
+	
+	/** Get one parameter value.
+	 */
+	public abstract Object getParameter (String name);
 }
