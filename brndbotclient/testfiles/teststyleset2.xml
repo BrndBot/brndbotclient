@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<styleSet name="styleset1">
+<dimensions>
+	<x>120</x>
+	<y>240</y>
+</dimensions>
+<org>MiskatonicU</org>
+<brand>Shiny</brand>
+<promo>Workshop</promo>
+<style>
+	<text>
+		<dimensions>
+			<x>120</x>
+			<y>30</y>
+		</dimensions>
+		<anchor>tl</anchor>
+		<offset>
+			<x>0</x>
+			<y>4</y>
+		</offset>
+		<font>Bodoni</font>
+		<alignment>left</alignment>
+		<size>16</size>
+		<palette>paletteone</palette>
+	</text>
+</style>
+<style>
+	<block>
+		<dimensions>
+			<x>120</x>
+			<y>30</y>
+		</dimensions>
+		<anchor>tl</anchor>
+		<offset>
+			<x>0</x>
+			<y>4</y>
+		</offset>
+		<opacity>24</opacity>
+		<multiply/>
+	</block>
+</style>
+<style>
+	<svgdata>
+		<dimensions>
+			<x>220</x>
+			<y>40</y>
+		</dimensions>
+		<anchor>br</anchor>
+		<offset>
+			<x>40</x>
+			<y>30</y>
+		</offset>
+		<svg/>
+	</svgdata>
+</style>
+<style>
+	<image>
+		<dimensions>
+			<x>100</x>
+			<y>0</y>
+		</dimensions>
+		<anchor>bl</anchor>
+		<offset>
+			<x>0</x>
+			<y>0</y>
+		</offset>
+		<imagepath>/var/brndbot/images/abcd.jpg</imagepath>
+		<opacity>90</opacity>
+	</image>
+</style>
+<style>
+	<logo>
+		<dimensions>
+			<x>90</x>
+			<y>35</y>
+		</dimensions>
+		<anchor>tr</anchor>
+		<offset>
+			<x>2</x>
+			<y>3</y>
+		</offset>
+	</logo>
+</style>
+</styleSet>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="test1">
+	<description>An absolutely minimal model file</description>
+	<org>MiskatonicU</org>
+	<category>class</category>
+</model>

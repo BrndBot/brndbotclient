@@ -1,4 +1,4 @@
-package brndbotclient;
+package com.brndbot.client;
 
 import static org.junit.Assert.*;
 

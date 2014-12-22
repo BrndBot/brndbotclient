@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="test2">
+	<description>A more complex model file</description>
+	<organization>MiskatonicU</organization>
+	<category>teacher</category>
+	<field name="textField">
+		<type>text</type>
+	</field>
+	<field name="svgField">
+		<type>svg</type>
+	</field>
+	<field name="logoField">
+		<type>logo</type>
+	</field>
+	<field name="imageField">
+		<type>image</type>
+	</field>
+	<field name="blockField">
+		<type>block</type>
+	</field>
+</model>

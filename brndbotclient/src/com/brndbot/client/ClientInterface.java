@@ -1,6 +1,12 @@
+/**
+ *  CONFIDENTIAL
+ *  
+ *  All rights reserved by Brndbot, Ltd. 2014
+ */
 package com.brndbot.client;
 
-import java.util.Map;
+//import java.util.List;
+//import java.util.Map;
 
 /**
  *  Each package must define a main entry class which implements ClientInterface.
@@ -18,4 +24,6 @@ import java.util.Map;
  */
 public interface ClientInterface {
 	public ClientResponse issueRequest(ClientRequest cr) ;
+	
+	public ModelCollection getModels ();
 }
