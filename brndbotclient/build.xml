@@ -6,9 +6,14 @@
   <!-- set global properties for this build -->
   <property name="src" location="src"/>
   <property name="classes" location="classes"/>
+  <property name="lib" location="lib"/>
   <property name="dist"  location="dist"/>
 
-
+  <path id="alljars">
+    <fileset dir="${lib}">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
   
   <target name="init">
     <!-- Create the time stamp -->
@@ -22,6 +27,7 @@
         description="compile the source " >
     <!-- Compile the java code from ${src} into ${classes} -->
     <javac srcdir="${src}" destdir="${classes}" debug="true" includeantruntime="false">
+		<classpath refid="alljars"/>
     </javac>
   </target>
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.Namespace;
 import org.jdom2.input.SAXBuilder;
 
 import com.brndbot.client.ClientException;
@@ -23,6 +24,9 @@ import com.brndbot.client.LogoStyle;
  */
 public class StyleSetParser {
 
+	private final static Namespace svgNamespace = 
+			Namespace.getNamespace ("http://www.w3.org/2000/svg");
+	
 	/* The AWT Dimension class uses floating point, so we create a custom
 	 * dimension class here for convenience. */
 	private class Dimension {
@@ -236,7 +240,7 @@ public class StyleSetParser {
 		SVGStyle svgs = new SVGStyle();
 		getCommonElements (svgElem, svgs);
 		// Are there namespace issues here?
-		Element svg = svgElem.getChild ("svg");
+		Element svg = svgElem.getChild ("svg", svgNamespace);
 		svgs.setSVG(svg);
 		ss.addStyle (svgs);
 	}

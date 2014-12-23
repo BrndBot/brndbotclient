@@ -5,25 +5,19 @@
  */
 package com.brndbot.client;
 
-//import java.util.List;
-//import java.util.Map;
+import java.util.List;
+
 
 /**
- *  Each package must define a main entry class which implements ClientInterface.
+ *  Each client module must define an entry class which implements ClientInterface.
+ *  The fully qualified name of this class will be in the database, or in
+ *  a configuration file pointed to from the database.
  *  
- *  ...as soon as we figure out what it consists of. It should, at a minimum, define
- *  a way to request data and get it back. We have to enumerate what the requests
- *  will be. They will be things like a list of top-level content types and a
- *  request of all content objects of a given type.
- *  
- *  So we need some terminology.
- *  
- *  Client content objects, content types; can we get more specific than this?
- *  
- *  Should there be a Request and Response object class?
  */
 public interface ClientInterface {
-	public ClientResponse issueRequest(ClientRequest cr) ;
+	// Is issueRequest really needed for anything?
+	//public ClientResponse issueRequest(ClientRequest cr) ;
 	
 	public ModelCollection getModels ();
+	public List<PromotionPrototype> getPromotionPrototypes ();
 }

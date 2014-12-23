@@ -50,7 +50,10 @@
 			<x>40</x>
 			<y>30</y>
 		</offset>
-		<svg/>
+		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+viewBox="0 0 1280 800" enable-background="new 0 0 1280 800" xml:space="preserve">
+			<polygon fill="#FF0000" stroke="#FFFFFF" stroke-miterlimit="10" points="232.5,166.5 232.5,306.5 559,306.5 677,166.5 "/>
+		</svg>
 	</svgdata>
 </style>
 <style>
