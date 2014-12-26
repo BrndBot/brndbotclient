@@ -15,7 +15,8 @@ public class ModelField {
 		IMAGE ("image"),
 		SVG ("svg"),
 		LOGO ("logo"),
-		BLOCK ("block");
+		BLOCK ("block"),
+		BUTTON ("button");
 		
 		private String stringRep;
 		
@@ -28,12 +29,35 @@ public class ModelField {
 		}
 	}
 	
-	private String name;
-	private StyleType styleType;
+	protected String name;
+	protected StyleType styleType;
 	
 	public ModelField(String name, StyleType styleType) {
 		this.name = name;
 		this.styleType = styleType;
+	}
+	
+	/** Replicate the field. This shies away from calling itself a 
+	 *  clone method, since it works only on well-behaved objects,
+	 *  and simply aggregates the subclasses' copy constructors.
+	 */
+	public ModelField replicate () {
+		switch (styleType) {
+		case TEXT:
+			return new TextField ((TextField) this);
+		case IMAGE:
+			return new ImageField ((ImageField) this);
+		case SVG:
+			return new SVGField ((SVGField) this);
+		case LOGO:
+			return new LogoField ((LogoField) this);
+		case BLOCK:
+			return new BlockField ((BlockField) this);
+		case BUTTON:
+			return new ButtonField ((ButtonField) this);
+		default:
+			return null;
+		}
 	}
 	
 	public String getName () {

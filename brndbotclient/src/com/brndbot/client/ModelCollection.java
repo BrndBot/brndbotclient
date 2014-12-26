@@ -17,13 +17,16 @@ import java.util.Set;
 public class ModelCollection {
 
 	private Map<String, List<Model>> categories;
+	private Map<String, Model> models;
 	
 	public ModelCollection () {
 		categories = new HashMap<>();
+		models = new HashMap<>();
 	}
 	
 	/** Add a Model. It will be stored in its category. */
 	public void addModel (Model m) {
+		models.put (m.getName(), m);
 		String cat = m.getCategory();
 		List<Model> catList = categories.get(cat);
 		if (catList == null) {
@@ -39,6 +42,10 @@ public class ModelCollection {
 	 *  Will return null if the category has no models. */
 	public List<Model> getModelsForCategory (String cat) {
 		return categories.get(cat);
+	}
+	
+	public Model getModelByName (String name) {
+		return models.get(name);
 	}
 	
 	/** Get all categories as an alphabetical list. */

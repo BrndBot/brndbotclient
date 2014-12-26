@@ -11,6 +11,15 @@ public class TextField extends ModelField {
 	public TextField(String name) {
 		super(name, StyleType.TEXT);
 	}
+	
+	/** Copy constructor. This is used to generate a Promotion's field
+	 *  from a Model's field. 
+	 */
+	public TextField (TextField modelf) {
+		super (modelf.name, StyleType.TEXT);
+		text = modelf.text;
+		style = modelf.style;
+	}
 
 	public String getText () {
 		return text;

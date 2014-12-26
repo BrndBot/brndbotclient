@@ -8,6 +8,14 @@ public class LogoField extends ModelField {
 		super(name, StyleType.LOGO);
 	}
 
+	/** Copy constructor. This is used to generate a Promotion's field
+	 *  from a Model's field. 
+	 */
+	public LogoField (LogoField modelf) {
+		super(modelf.name, StyleType.LOGO);
+		style = modelf.style;
+	}
+	
 	public LogoStyle getStyle () {
 		return style;
 	}
