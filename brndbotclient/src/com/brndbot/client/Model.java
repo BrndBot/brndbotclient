@@ -7,12 +7,13 @@ import java.util.List;
  *  fields to be included (text, image, etc.) but nothing about their
  *  content or visual characteristics.
  */
-public class Model {
+public class Model implements Comparable<Model> {
 
 	private String name;
 	private String description;
 	private String category;
 	private String organization;
+	private String buttonImage;
 	
 	private List<ModelField> fields;
 	
@@ -52,7 +53,25 @@ public class Model {
 		organization = org;
 	}
 	
+	/** The path, relative to the local storage directory, for
+	 *  the model's button image. */
+	public String getButtonImage () {
+		return buttonImage;
+	}
+	
+	/** Set the path, relative to the local storage directory, of
+	 *  the model's button image. */
+	public void setButtonImage (String path) {
+		buttonImage = path;
+	}
+	
 	public List<ModelField> getFields () {
 		return fields;
+	}
+
+	/** Implement a comparison method for purposes of sorting by name */
+	@Override
+	public int compareTo(Model m) {
+		return this.name.compareTo(m.name);
 	}
 }

@@ -18,6 +18,11 @@ public interface ClientInterface {
 	// Is issueRequest really needed for anything?
 	//public ClientResponse issueRequest(ClientRequest cr) ;
 	
+	/** Returns a ModelCollection hierarchically describing all the client's
+	 *  models 
+	 */
 	public ModelCollection getModels ();
-	public List<PromotionPrototype> getPromotionPrototypes ();
+	
+	/** Returns a List of all the PromotionPrototypes for a given Model */
+	public List<PromotionPrototype> getPromotionPrototypes (Model m);
 }

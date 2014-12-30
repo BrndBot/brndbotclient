@@ -38,6 +38,12 @@ public class ModelCollection {
 		catList.add (m);
 	}
 	
+	/** Create and initialize a new category. */
+	public void addCategory (String cat) {
+		ArrayList<Model> catModels = new ArrayList<>();
+		categories.put (cat, catModels);
+	}
+	
 	/** Get all Models in a category.
 	 *  Will return null if the category has no models. */
 	public List<Model> getModelsForCategory (String cat) {
@@ -54,5 +60,12 @@ public class ModelCollection {
 		List<String> catList = new ArrayList<String>(catSet);
 		java.util.Collections.sort(catList);
 		return catList;
+	}
+	
+	/** Get all models as an alphabetic list. */
+	public List<Model> getModels () {
+		List<Model> modelList = new ArrayList<>(models.values());
+		java.util.Collections.sort(modelList);
+		return modelList;
 	}
 }
