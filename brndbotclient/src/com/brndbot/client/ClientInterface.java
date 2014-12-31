@@ -24,5 +24,5 @@ public interface ClientInterface {
 	public ModelCollection getModels ();
 	
 	/** Returns a List of all the PromotionPrototypes for a given Model */
-	public List<PromotionPrototype> getPromotionPrototypes (Model m);
+	public List<PromotionPrototype> getPromotionPrototypes (String modelName);
 }
