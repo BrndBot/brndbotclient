@@ -25,8 +25,32 @@ public class Model implements Comparable<Model> {
 	
 	/** Add a field to the model, defining it by name and type */
 	public void addField (String name, ModelField.StyleType type) {
-		ModelField mf = new ModelField (name, type);
-		fields.add (mf);
+		switch (type) {
+		case TEXT:
+			TextField tf = new TextField (name);
+			fields.add(tf);
+			break;
+		case IMAGE:
+			ImageField imf = new ImageField (name);
+			fields.add (imf);
+			break;
+		case SVG:
+			SVGField sf = new SVGField (name);
+			fields.add (sf);
+			break;
+		case BLOCK:
+			BlockField bf = new BlockField (name);
+			fields.add (bf);
+			break;
+		case LOGO:
+			LogoField lf = new LogoField (name);
+			fields.add (lf);
+			break;
+		case BUTTON:
+			ButtonField btf = new ButtonField (name);
+			fields.add (btf);
+			break;
+		}
 	}
 	
 	public String getName () {

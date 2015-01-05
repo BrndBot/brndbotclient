@@ -1,5 +1,8 @@
 package com.brndbot.client;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ImageField extends ModelField {
 
 	private String imagePath;
@@ -32,5 +35,11 @@ public class ImageField extends ModelField {
 	
 	public void setStyle(ImageStyle s) {
 		style = s;
+	}
+	
+	@Override
+	public JSONObject toJSON() throws JSONException {
+		return super.toJSON();
+		// TODO add image content
 	}
 }

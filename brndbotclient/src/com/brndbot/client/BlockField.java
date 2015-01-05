@@ -1,5 +1,8 @@
 package com.brndbot.client;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class BlockField extends ModelField {
 
 	private BlockStyle style;
@@ -22,5 +25,10 @@ public class BlockField extends ModelField {
 	
 	public void setStyle (BlockStyle s) {
 		style = s;
+	}
+	
+	@Override
+	public JSONObject toJSON() throws JSONException {
+		return super.toJSON();
 	}
 }

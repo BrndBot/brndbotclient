@@ -1,5 +1,8 @@
 package com.brndbot.client;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ButtonField extends ModelField {
 	
 	private ButtonStyle style;
@@ -18,4 +21,10 @@ public class ButtonField extends ModelField {
 	 public ButtonStyle getStyle () {
 		return style;
 	 }
+	 
+		@Override
+		public JSONObject toJSON() throws JSONException {
+			return super.toJSON();
+			// TODO add button content
+		}
 }

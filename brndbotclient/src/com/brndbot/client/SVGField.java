@@ -1,6 +1,8 @@
 package com.brndbot.client;
 
 import org.jdom2.Element;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SVGField extends ModelField {
 
@@ -34,5 +36,11 @@ public class SVGField extends ModelField {
 	
 	public void setStyle (SVGStyle s) {
 		style = s;
+	}
+	
+	@Override
+	public JSONObject toJSON() throws JSONException {
+		return super.toJSON();
+		// TODO add local fields
 	}
 }

@@ -1,5 +1,8 @@
 package com.brndbot.client;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /** A TextField is a field of a promotion with specified style
  *  and text content.
  */
@@ -35,5 +38,12 @@ public class TextField extends ModelField {
 	
 	public void setStyle(TextStyle s) {
 		style = s;
+	}
+	
+	@Override
+	public JSONObject toJSON() throws JSONException {
+		JSONObject json = super.toJSON();
+		json.put ("text", text);
+		return json;
 	}
 }
