@@ -20,9 +20,9 @@ import org.slf4j.LoggerFactory;
  *  a Promotion should be the same thing, except that a Promotion is
  *  customized by the user.
  */
-public class PromotionPrototype {
+public class Promotion {
 
-	final static Logger logger = LoggerFactory.getLogger(PromotionPrototype.class);
+	final static Logger logger = LoggerFactory.getLogger(Promotion.class);
 	
 	protected String name;
 	protected Model model;
@@ -30,7 +30,7 @@ public class PromotionPrototype {
 	private List<ModelField> content;
 
 	/** Constructor. The StyleSet may be null. */
-	public PromotionPrototype (String n, Model m, StyleSet ss) {
+	public Promotion (String n, Model m, StyleSet ss) {
 		name = n;
 		model = m;
 		styleSet = ss;
@@ -80,6 +80,9 @@ public class PromotionPrototype {
 		if (model != null) {
 			val.put ("modelName", model.getName());
 		}
+		if (name != null) {
+			val.put ("name", name);
+		}
 		if (styleSet != null) {
 			val.put ("styleSetName", styleSet.getName());
 		}
@@ -97,8 +100,7 @@ public class PromotionPrototype {
 		}
 		// Each field gets a JSON value which is its name prefixed by "field"
 		// This will get messy in the Kendo template. We'll need to use the
-		// model to build the template! We may need to set up some conventions,
-		// e.g., that there is always a field named "label".
+		// model to build the template! We may need to set up some conventions.
 		for (ModelField field : fields) {
 			val.put ("field" + field.getName(), field.toJSON());
 		}

@@ -18,13 +18,18 @@ public class ButtonField extends ModelField {
 		 style = modelf.style;
 	 }
 	 
-	 public ButtonStyle getStyle () {
+	public ButtonStyle getStyle () {
 		return style;
-	 }
+	}
 	 
-		@Override
-		public JSONObject toJSON() throws JSONException {
-			return super.toJSON();
-			// TODO add button content
-		}
+	public void setStyle(ButtonStyle s) {
+		style = s;
+	}
+		
+
+	@Override
+	public JSONObject toJSON() throws JSONException {
+		return super.toJSON();
+		// TODO add button content
+	}
 }

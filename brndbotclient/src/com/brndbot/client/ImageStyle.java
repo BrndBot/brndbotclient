@@ -4,10 +4,9 @@ public class ImageStyle extends Style {
 
 	private String imagePath;
 	
-	public ImageStyle() {
-		// TODO Auto-generated constructor stub
-	}
+
 	
+	/** An ImageStyle may hold a default image path */
 	public String getImagePath () {
 		return imagePath;
 	}

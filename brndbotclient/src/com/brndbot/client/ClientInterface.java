@@ -5,6 +5,7 @@
  */
 package com.brndbot.client;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -13,8 +14,9 @@ import java.util.List;
  *  The fully qualified name of this class will be in the database, or in
  *  a configuration file pointed to from the database.
  *  
+ *  Implementations of ClientInterface should take care to be really Serializable.
  */
-public interface ClientInterface {
+public interface ClientInterface extends Serializable {
 	// Is issueRequest really needed for anything?
 	//public ClientResponse issueRequest(ClientRequest cr) ;
 	
@@ -24,5 +26,5 @@ public interface ClientInterface {
 	public ModelCollection getModels ();
 	
 	/** Returns a List of all the PromotionPrototypes for a given Model */
-	public List<PromotionPrototype> getPromotionPrototypes (String modelName);
+	public List<Promotion> getPromotionPrototypes (String modelName);
 }

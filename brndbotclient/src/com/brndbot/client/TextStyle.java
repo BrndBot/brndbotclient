@@ -38,6 +38,10 @@ public class TextStyle extends Style {
 		return pointSize;
 	}
 	
+	public void setPointSize (int ptsize) {
+		pointSize = ptsize;
+	}
+	
 	public boolean isItalic () {
 		return italic;
 	}
