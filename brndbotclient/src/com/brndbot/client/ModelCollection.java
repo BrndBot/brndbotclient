@@ -12,7 +12,8 @@ import java.util.Map;
 import java.util.Set;
 
 /** A ModelCollection defines all the models which are currently available,
- *  grouping them by category.
+ *  grouping them by category. A category is simply a grouping of models
+ *  for presentation purposes.
  */
 public class ModelCollection {
 
@@ -45,6 +46,11 @@ public class ModelCollection {
 		categories.put (cat, catModels);
 	}
 	
+	/** Get all the Models as a map by name. */
+	public Map<String,Model> getAllModels () {
+		return models;
+	}
+	
 	/** Get all Models in a category.
 	 *  Will return null if the category has no models. */
 	public Map<String,Model> getModelsForCategory (String cat) {
@@ -63,10 +69,10 @@ public class ModelCollection {
 		return catList;
 	}
 	
-	/** Get all models as an alphabetic list. */
-	public List<Model> getModels () {
-		List<Model> modelList = new ArrayList<>(models.values());
-		java.util.Collections.sort(modelList);
-		return modelList;
-	}
+//	/** Get all models as an alphabetic list. */
+//	public List<Model> getModels () {
+//		List<Model> modelList = new ArrayList<>(models.values());
+//		java.util.Collections.sort(modelList);
+//		return modelList;
+//	}
 }

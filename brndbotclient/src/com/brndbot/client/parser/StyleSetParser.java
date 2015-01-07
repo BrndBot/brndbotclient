@@ -7,6 +7,8 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
 import org.jdom2.input.SAXBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.brndbot.client.ClientException;
 import com.brndbot.client.Style;
@@ -24,6 +26,8 @@ import com.brndbot.client.LogoStyle;
  */
 public class StyleSetParser {
 
+	final static Logger logger = LoggerFactory.getLogger(StyleSetParser.class);
+	
 	private final static Namespace svgNamespace = 
 			Namespace.getNamespace ("http://www.w3.org/2000/svg");
 	
@@ -214,6 +218,14 @@ public class StyleSetParser {
 		ts.setItalic (ital != null);
 		Element bold = textElem.getChild("bold");
 		ts.setBold (bold != null);
+		Element size = textElem.getChild("size");
+		int ptSize = 12;		// default if somehow missing or bad
+		try {
+			ptSize = Integer.parseInt(size.getText());
+		} catch (Exception e) {
+			logger.warn ("Bad point size, defaulting to 12");
+		}
+		ts.setPointSize(ptSize);
 		
 		DropShadow ds = parseDropShadow ("dropShadow", textElem);
 		if (ds != null) {

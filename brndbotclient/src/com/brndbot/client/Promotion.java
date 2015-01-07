@@ -39,6 +39,19 @@ public class Promotion implements Serializable {
 		}
 	}
 	
+	/** Copy constructor. This generates a working Promotion from a 
+	 *  prototype.
+	 */
+	public Promotion (Promotion proto) {
+		name = proto.name;
+		model = proto.model;
+		styleSet = proto.styleSet;
+		content = new ArrayList<>(proto.content.size());
+		for (ModelField f : proto.content) {
+			content.add (f.replicate());
+		}
+	}
+	
 	public String getName () {
 		return name;
 	}
@@ -49,6 +62,10 @@ public class Promotion implements Serializable {
 	
 	public StyleSet getStyleSet () {
 		return styleSet;
+	}
+	
+	public void setStyleSet (StyleSet ss) {
+		styleSet = ss;
 	}
 
 	public List<ModelField> getContent () {
