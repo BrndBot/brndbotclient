@@ -1,26 +1,24 @@
 package com.brndbot.client;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
+//import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** A PromotionPrototype defines the fields of a promotion using a
+/** A Promotion defines the fields of a promotion using a
  *  Model, and assigns a default styleset and content to them.
+ *  The same class is used for prototypes which are available to the
+ *  user and content-specific promotions created by the user.
  *  
- *  Should there be a subclass called Promotion? Maybe it should be in
- *  bbproject rather than here. 
- *  
- *  Waitwaitwait!! The point of a Promotion Prototype is that it holds
- *  specific content. I'm starting to think a PromotionPrototype and
- *  a Promotion should be the same thing, except that a Promotion is
- *  customized by the user.
  */
-public class Promotion {
+public class Promotion implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(Promotion.class);
 	

@@ -6,7 +6,7 @@
 package com.brndbot.client;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -17,14 +17,17 @@ import java.util.List;
  *  Implementations of ClientInterface should take care to be really Serializable.
  */
 public interface ClientInterface extends Serializable {
-	// Is issueRequest really needed for anything?
-	//public ClientResponse issueRequest(ClientRequest cr) ;
+
+	/** Returns the name of the ClientInterface. Every implementation of
+	 *  ClientInterface must have a unique name. */
+	public String getName();
 	
 	/** Returns a ModelCollection hierarchically describing all the client's
-	 *  models 
+	 *  models. The implementation should avoid making a large collection of models
+	 *  into sesson data.
 	 */
 	public ModelCollection getModels ();
 	
-	/** Returns a List of all the PromotionPrototypes for a given Model */
-	public List<Promotion> getPromotionPrototypes (String modelName);
+	/** Returns a Map of names to PromotionPrototypes for a given Model */
+	public Map<String,Promotion> getPromotionPrototypes (String modelName);
 }

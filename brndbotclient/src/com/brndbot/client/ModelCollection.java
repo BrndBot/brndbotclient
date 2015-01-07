@@ -16,7 +16,8 @@ import java.util.Set;
  */
 public class ModelCollection {
 
-	private Map<String, List<Model>> categories;
+	/** Map from category name to a Map of models indexed by name. */
+	private Map<String, Map<String, Model>> categories;
 	private Map<String, Model> models;
 	
 	public ModelCollection () {
@@ -28,25 +29,25 @@ public class ModelCollection {
 	public void addModel (Model m) {
 		models.put (m.getName(), m);
 		String cat = m.getCategory();
-		List<Model> catList = categories.get(cat);
-		if (catList == null) {
+		Map<String,Model> catMap = categories.get(cat);
+		if (catMap == null) {
 			// Category is not already in map, add it
-			catList = new ArrayList<>();
-			categories.put(cat, catList);
+			catMap = new HashMap<>();
+			categories.put(cat, catMap);
 		}
 		// Add the model to the category
-		catList.add (m);
+		catMap.put (m.getName(), m);
 	}
 	
 	/** Create and initialize a new category. */
 	public void addCategory (String cat) {
-		ArrayList<Model> catModels = new ArrayList<>();
+		Map<String, Model> catModels = new HashMap<>();
 		categories.put (cat, catModels);
 	}
 	
 	/** Get all Models in a category.
 	 *  Will return null if the category has no models. */
-	public List<Model> getModelsForCategory (String cat) {
+	public Map<String,Model> getModelsForCategory (String cat) {
 		return categories.get(cat);
 	}
 	

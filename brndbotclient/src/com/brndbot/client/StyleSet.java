@@ -5,13 +5,17 @@
  */
 package com.brndbot.client;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /* A StyleSet is an ordered collection of Styles, plus some information
  * defining the appearance of the promotion as a whole.
  */
-public class StyleSet {
+public class StyleSet implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private String name;
 	private String model;
 	private String organization;

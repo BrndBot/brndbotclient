@@ -1,8 +1,12 @@
 package com.brndbot.client;
 
+import java.io.Serializable;
+
 /* A Style defines the presentation of a field. Each kind of field 
  * is associated with a subclass of Style. */
-public abstract class Style {
+public abstract class Style implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	public enum Anchor {
 		TOP_LEFT,
