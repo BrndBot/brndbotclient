@@ -29,8 +29,43 @@ public class ModelField {
 		}
 	}
 	
+	public enum AnchorType {
+		TOP_LEFT ("tl"),
+		TOP_RIGHT ("tr"),
+		BOTTOM_LEFT ("bl"),
+		BOTTOM_RIGHT ("br");
+		
+		private String xmlRep;
+		
+		private AnchorType (String s) {
+			xmlRep = s;
+		}
+		
+		public static AnchorType findByString (String s) {
+			switch (s) {
+			case "tl":
+				return TOP_LEFT;
+			case "tr":
+				return TOP_RIGHT;
+			case "bl":
+				return BOTTOM_LEFT;
+			case "br":
+				return BOTTOM_RIGHT;
+			default:
+				return null;
+			}
+		}
+		
+		public String toString () {
+			return xmlRep;
+		}
+	}
+	
 	protected String name;
 	protected StyleType styleType;
+	protected AnchorType anchorType;
+	protected int xOffset;
+	protected int yOffset;
 	
 	public ModelField(String name, StyleType styleType) {
 		this.name = name;
@@ -66,6 +101,30 @@ public class ModelField {
 	
 	public StyleType getStyleType () {
 		return styleType;
+	}
+	
+	public int getXOffset () {
+		return xOffset;
+	}
+	
+	public void setXOffset (int x) {
+		xOffset = x;
+	}
+	
+	public int getYOffset () {
+		return yOffset;
+	}
+	
+	public void setYOffset (int y) {
+		yOffset = y;
+	}
+	
+	public AnchorType getAnchorType () {
+		return anchorType;
+	}
+	
+	public void setAnchorType (String typ) {
+		anchorType = AnchorType.findByString (typ);
 	}
 	
 	/** Represent a ModelField as a JSON object. */

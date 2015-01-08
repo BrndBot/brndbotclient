@@ -193,6 +193,7 @@ public class StyleSetParser {
 	}
 	
 	private void addTextStyle (Element textElem, StyleSet ss) throws ClientException {
+		logger.debug ("addTextStyle");
 		TextStyle ts = new TextStyle();
 		getCommonElements (textElem, ts);
 		
@@ -215,8 +216,10 @@ public class StyleSetParser {
 		ts.setAlignment (align);
 		
 		Element ital = textElem.getChild("italic");
+		logger.debug ("Italic is {}", (ital != null ? "specified" : "not specified"));
 		ts.setItalic (ital != null);
 		Element bold = textElem.getChild("bold");
+		logger.debug ("Bold is {}", (bold != null ? "specified" : "not specified"));
 		ts.setBold (bold != null);
 		Element size = textElem.getChild("size");
 		int ptSize = 12;		// default if somehow missing or bad

@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 public class BlockField extends ModelField {
 
+	private String color;
 	private BlockStyle style;
 	
 	public BlockField(String name) {
@@ -25,6 +26,10 @@ public class BlockField extends ModelField {
 	
 	public void setStyle (BlockStyle s) {
 		style = s;
+	}
+	
+	public String getColor () {
+		return color;
 	}
 	
 	@Override
