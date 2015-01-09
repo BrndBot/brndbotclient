@@ -1,9 +1,11 @@
-package com.brndbot.client;
+package com.brndbot.client.style;
 
 /* A TextStyle defines the presentation of a text field. */
 public class TextStyle extends Style {
 
 	
+	private static final long serialVersionUID = 1L;
+
 	public enum Alignment {
 		LEFT,
 		RIGHT,
@@ -17,13 +19,35 @@ public class TextStyle extends Style {
 	private boolean italic;
 	private boolean bold;
 	private boolean dropShadow;
-	private int dropShadowXOffset;
-	private int dropShadowYOffset;
-	private int dropShadowBlur;
 	private Alignment alignment;
+	private String textColor;
+	
+	public TextStyle () {
+		
+	}
+	
+	/** Copy constructor. */
+	public TextStyle (TextStyle s) {
+		super (s);
+		italic = s.italic;
+		bold = s.bold;
+		dropShadow = s.dropShadow;
+		alignment = s.alignment;
+		textColor = s.textColor;
+		typeface = s.typeface;
+	}
 	
 	public String getTypeface () {
 		return typeface;
+	}
+	
+	public void setTypeface (String f) {
+		typeface = f;
+	}
+	
+	@Override
+	public StyleType getStyleType () {
+		return StyleType.TEXT;
 	}
 	
 	/** TODO have to initialize this somehow. Do I want a big 
@@ -62,16 +86,12 @@ public class TextStyle extends Style {
 		return dropShadow;
 	}
 	
-	public int getDropShadowXOffset () {
-		return dropShadowXOffset;
-	}
-
-	public int getDropShadowYOffset () {
-		return dropShadowYOffset;
+	public String getTextColor () {
+		return textColor;
 	}
 	
-	public int getDropShadowBlur () {
-		return dropShadowBlur;
+	public void setTextColor (String c) {
+		textColor = c;
 	}
 	
 	public Alignment getAlignment () {

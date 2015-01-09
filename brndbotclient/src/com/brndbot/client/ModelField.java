@@ -2,74 +2,37 @@ package com.brndbot.client;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.brndbot.client.style.Style;
+import com.brndbot.client.style.Style.StyleType;
 
 /** A ModelField is (logically enough) a field of a Model. It 
  *  has a name and type. ModelField can be used on its own but
  *  also serves as a superclass for type-specific fields with 
  *  content.
  */
-public class ModelField {
+public abstract class ModelField {
 
-	public enum StyleType {
-		TEXT ("text"),
-		IMAGE ("image"),
-		SVG ("svg"),
-		LOGO ("logo"),
-		BLOCK ("block"),
-		BUTTON ("button");
-		
-		private String stringRep;
-		
-		private StyleType (String s) {
-			stringRep = s;
-		}
-		
-		public String toString () {
-			return stringRep;
-		}
-	}
+
 	
-	public enum AnchorType {
-		TOP_LEFT ("tl"),
-		TOP_RIGHT ("tr"),
-		BOTTOM_LEFT ("bl"),
-		BOTTOM_RIGHT ("br");
-		
-		private String xmlRep;
-		
-		private AnchorType (String s) {
-			xmlRep = s;
-		}
-		
-		public static AnchorType findByString (String s) {
-			switch (s) {
-			case "tl":
-				return TOP_LEFT;
-			case "tr":
-				return TOP_RIGHT;
-			case "bl":
-				return BOTTOM_LEFT;
-			case "br":
-				return BOTTOM_RIGHT;
-			default:
-				return null;
-			}
-		}
-		
-		public String toString () {
-			return xmlRep;
-		}
-	}
+	
+	final static Logger logger = LoggerFactory.getLogger(ModelField.class);
 	
 	protected String name;
 	protected StyleType styleType;
-	protected AnchorType anchorType;
-	protected int xOffset;
-	protected int yOffset;
 	
 	public ModelField(String name, StyleType styleType) {
 		this.name = name;
 		this.styleType = styleType;
+	}
+	
+	/** Copy constructor. Copies the elements common to all subclasses.
+	 *  The subclass copy constructor must finish the job. */
+	public ModelField (ModelField modelf) {
+		this.name = modelf.name;
+		this.styleType = modelf.styleType;
 	}
 	
 	/** Replicate the field. This shies away from calling itself a 
@@ -95,6 +58,8 @@ public class ModelField {
 		}
 	}
 	
+	public abstract void setStyle (Style s);
+	
 	public String getName () {
 		return name;
 	}
@@ -103,29 +68,6 @@ public class ModelField {
 		return styleType;
 	}
 	
-	public int getXOffset () {
-		return xOffset;
-	}
-	
-	public void setXOffset (int x) {
-		xOffset = x;
-	}
-	
-	public int getYOffset () {
-		return yOffset;
-	}
-	
-	public void setYOffset (int y) {
-		yOffset = y;
-	}
-	
-	public AnchorType getAnchorType () {
-		return anchorType;
-	}
-	
-	public void setAnchorType (String typ) {
-		anchorType = AnchorType.findByString (typ);
-	}
 	
 	/** Represent a ModelField as a JSON object. */
 	public JSONObject toJSON () throws JSONException {

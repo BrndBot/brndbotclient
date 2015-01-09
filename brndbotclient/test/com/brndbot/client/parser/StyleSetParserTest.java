@@ -8,13 +8,13 @@ import java.util.List;
 import org.jdom2.Element;
 import org.junit.Test;
 
-import com.brndbot.client.BlockStyle;
-import com.brndbot.client.ImageStyle;
-import com.brndbot.client.LogoStyle;
-import com.brndbot.client.SVGStyle;
-import com.brndbot.client.Style;
-import com.brndbot.client.StyleSet;
-import com.brndbot.client.TextStyle;
+import com.brndbot.client.style.BlockStyle;
+import com.brndbot.client.style.ImageStyle;
+import com.brndbot.client.style.LogoStyle;
+import com.brndbot.client.style.SVGStyle;
+import com.brndbot.client.style.Style;
+import com.brndbot.client.style.StyleSet;
+import com.brndbot.client.style.TextStyle;
 
 public class StyleSetParserTest {
 

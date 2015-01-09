@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import com.brndbot.client.style.TextStyle;
+
 public class TextFieldTest {
 
 	@Test

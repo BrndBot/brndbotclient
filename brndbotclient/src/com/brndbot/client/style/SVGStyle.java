@@ -1,4 +1,4 @@
-package com.brndbot.client;
+package com.brndbot.client.style;
 
 import org.jdom2.Element;
 
@@ -9,12 +9,24 @@ import org.jdom2.Element;
  */
 public class SVGStyle extends Style {
 
+	private static final long serialVersionUID = 1L;
+
 	/** The SVG content, in JDOM form */
 	private Element svg;
 	
-	public SVGStyle() {
+	public SVGStyle () {
 	}
 	
+	public SVGStyle(SVGStyle s) {
+		super (s);
+		svg = s.svg;
+	}
+	
+	@Override
+	public StyleType getStyleType () {
+		return StyleType.SVG;
+	}
+
 	public Element getSVG () {
 		return svg;
 	}

@@ -4,6 +4,10 @@ import org.jdom2.Element;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.brndbot.client.style.SVGStyle;
+import com.brndbot.client.style.Style;
+import com.brndbot.client.style.Style.StyleType;
+
 public class SVGField extends ModelField {
 
 	private Element svg;
@@ -17,13 +21,18 @@ public class SVGField extends ModelField {
 	 *  from a Model's field. 
 	 */
 	public SVGField (SVGField modelf) {
-		super (modelf.name, StyleType.SVG);
+		super (modelf);
 		svg = modelf.svg;		// safe only if the SVG is immutable
 		style = modelf.style;
 	}
 	
+	/** Returns the SVG which has been set for this field, if any.
+	 *  If it's null, returns the style's SVG. */
 	public Element getSVG () {
-		return svg;
+		if (svg != null) {
+			return svg;
+		}
+		else return style.getSVG();
 	}
 	
 	public void setSVG(Element s) {
@@ -34,8 +43,8 @@ public class SVGField extends ModelField {
 		return style;
 	}
 	
-	public void setStyle (SVGStyle s) {
-		style = s;
+	public void setStyle (Style s) {
+		style = (SVGStyle) s;
 	}
 	
 	@Override

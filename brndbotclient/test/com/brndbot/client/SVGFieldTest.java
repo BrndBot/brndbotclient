@@ -6,6 +6,8 @@ import org.jdom2.Element;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import com.brndbot.client.style.SVGStyle;
+
 public class SVGFieldTest {
 
 	@Test

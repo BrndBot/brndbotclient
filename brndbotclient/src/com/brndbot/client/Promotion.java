@@ -2,13 +2,20 @@ package com.brndbot.client;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+
+
 
 //import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.brndbot.client.style.Style;
+import com.brndbot.client.style.StyleSet;
 
 /** A Promotion defines the fields of a promotion using a
  *  Model, and assigns a default styleset and content to them.
@@ -33,9 +40,21 @@ public class Promotion implements Serializable {
 		model = m;
 		styleSet = ss;
 		// Clone model content into the Promotion, doing a deep copy
+		Iterator<Style> styleIter = null;
 		content = new ArrayList<>();
-		for (ModelField f : m.getFields()) {
-			content.add (f.replicate());
+		if (ss != null) {
+			styleIter = ss.getStyles().iterator();
+		}
+		try {
+			for (ModelField f : m.getFields()) {
+				ModelField newf = f.replicate();
+				if (styleIter != null)
+					newf.setStyle (styleIter.next());
+				content.add (newf);
+			}
+		} catch (Exception e) {
+			logger.error ("Incompatible style for model {}", m.getName());
+			logger.error (e.getClass().getName());
 		}
 	}
 	

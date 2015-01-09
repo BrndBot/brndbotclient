@@ -10,8 +10,7 @@ import java.util.List;
 
 import com.brndbot.client.ClientException;
 import com.brndbot.client.Model;
-//import com.brndbot.client.ModelField;
-import com.brndbot.client.ModelField.StyleType;
+import com.brndbot.client.style.Style.StyleType;
 
 import org.jdom2.Document;
 import org.jdom2.Element;

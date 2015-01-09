@@ -7,6 +7,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.brndbot.client.style.StyleSet;
+
 /** A BrandIdentity is a set of Promotion prototypes. One organization
  *  can have multiple brand identities. 
  *  

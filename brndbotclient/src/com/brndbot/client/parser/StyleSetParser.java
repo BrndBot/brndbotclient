@@ -11,13 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.brndbot.client.ClientException;
-import com.brndbot.client.Style;
-import com.brndbot.client.StyleSet;
-import com.brndbot.client.ImageStyle;
-import com.brndbot.client.TextStyle;
-import com.brndbot.client.SVGStyle;
-import com.brndbot.client.BlockStyle;
-import com.brndbot.client.LogoStyle;
+import com.brndbot.client.style.BlockStyle;
+import com.brndbot.client.style.ImageStyle;
+import com.brndbot.client.style.LogoStyle;
+import com.brndbot.client.style.SVGStyle;
+import com.brndbot.client.style.Style;
+import com.brndbot.client.style.StyleSet;
+import com.brndbot.client.style.TextStyle;
 
 /**
  *  A StyleSetParser turns an XML styleset file into a StyleSet object.
@@ -170,6 +170,7 @@ public class StyleSetParser {
 		s.setHeight((int) dim.getHeight());
 		
 		String anchorText = styleElem.getChildText("anchor");
+		logger.debug ("anchor = {}", anchorText);
 		Style.Anchor anchor = null;
 		switch (anchorText) {
 		case "tl":
@@ -185,6 +186,8 @@ public class StyleSetParser {
 			anchor = Style.Anchor.BOTTOM_RIGHT;
 			break;
 		}
+		if (anchor == null)
+			logger.warn ("Invalid anchor");
 		s.setAnchor(anchor);
 		
 		Dimension offset = parseDimensions("offset", styleElem);
@@ -228,6 +231,9 @@ public class StyleSetParser {
 		} catch (Exception e) {
 			logger.warn ("Bad point size, defaulting to 12");
 		}
+		String color = (textElem.getChildText("textcolor"));
+		if (color != null)
+			ts.setTextColor (color);
 		ts.setPointSize(ptSize);
 		
 		DropShadow ds = parseDropShadow ("dropShadow", textElem);
@@ -264,6 +270,18 @@ public class StyleSetParser {
 		BlockStyle bs = new BlockStyle();
 		getCommonElements (blockElem, bs);
 		bs.setOpacity (Integer.parseInt(blockElem.getChildText("opacity")));
+		String pal = blockElem.getChildText ("palette");
+		int palidx = paletteSelToIndex (pal);
+		logger.debug ("Palette {}", pal);
+		if (palidx < 0) {
+			String color = blockElem.getChildText ("blockcolor");
+			logger.debug ("Color {}", color);
+			if (color != null)
+				bs.setColor (color);
+		}
+		else {
+			bs.setPaletteSelection (palidx);
+		}
 		Element multiply = blockElem.getChild("multiply");
 		bs.setMultiply (multiply != null);
 		ss.addStyle (bs);
@@ -308,5 +326,22 @@ public class StyleSetParser {
 			throw new ClientException (e);
 		}
 
+	}
+	
+	/* Convert a palette selector to a number. We use 1-based indexing.
+	 * -1 means it's customcolor or something invalid. */
+	private int paletteSelToIndex (String sel) {
+		switch (sel) {
+		case "paletteone":
+			return 1;
+		case "palettetwo":
+			return 2;
+		case "palettethree":
+			return 3;
+		case "palettefour":
+			return 4;
+		default:
+			return -1;
+		}
 	}
 }

@@ -3,6 +3,8 @@ package com.brndbot.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.brndbot.client.style.Style.StyleType;
+
 /*  A Model is a representation of a type of presentation. It defines
  *  fields to be included (text, image, etc.) but nothing about their
  *  content or visual characteristics.
@@ -24,7 +26,7 @@ public class Model implements Comparable<Model> {
 	}
 	
 	/** Add a field to the model, defining it by name and type */
-	public void addField (String name, ModelField.StyleType type) {
+	public void addField (String name, StyleType type) {
 		switch (type) {
 		case TEXT:
 			TextField tf = new TextField (name);

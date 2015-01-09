@@ -3,6 +3,10 @@ package com.brndbot.client;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.brndbot.client.style.ImageStyle;
+import com.brndbot.client.style.Style;
+import com.brndbot.client.style.Style.StyleType;
+
 public class ImageField extends ModelField {
 
 	private String imagePath;
@@ -16,12 +20,16 @@ public class ImageField extends ModelField {
 	 *  from a Model's field. 
 	 */
 	public ImageField (ImageField modelf) {
-		super (modelf.name, StyleType.IMAGE);
+		super (modelf);
 		imagePath = modelf.imagePath;
 		style = modelf.style;
 	}
 	
+	/** Returns the field's image path if not null; otherwise
+	 *  returns the style's image path. */
 	public String getImagePath () {
+		if (imagePath == null)
+			return style.getImagePath();
 		return imagePath;
 	}
 	
@@ -33,8 +41,8 @@ public class ImageField extends ModelField {
 		return style;
 	}
 	
-	public void setStyle(ImageStyle s) {
-		style = s;
+	public void setStyle(Style s) {
+		style = (ImageStyle) s;
 	}
 	
 	@Override

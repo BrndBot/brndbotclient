@@ -3,6 +3,10 @@ package com.brndbot.client;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.brndbot.client.style.ButtonStyle;
+import com.brndbot.client.style.Style;
+import com.brndbot.client.style.Style.StyleType;
+
 public class ButtonField extends ModelField {
 	
 	private ButtonStyle style;
@@ -14,7 +18,7 @@ public class ButtonField extends ModelField {
 	/** Copy constructor. This is used to generate a Promotion's field
 	 *  from a Model's field. 
 	 */	public ButtonField (ButtonField modelf) {
-		 super (modelf.name, StyleType.BUTTON);
+		 super (modelf);
 		 style = modelf.style;
 	 }
 	 
@@ -22,8 +26,8 @@ public class ButtonField extends ModelField {
 		return style;
 	}
 	 
-	public void setStyle(ButtonStyle s) {
-		style = s;
+	public void setStyle(Style s) {
+		style = (ButtonStyle) s;
 	}
 		
 

@@ -1,12 +1,17 @@
-package com.brndbot.client;
+package com.brndbot.client.style;
 
 import java.io.Serializable;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /* A Style defines the presentation of a field. Each kind of field 
  * is associated with a subclass of Style. */
 public abstract class Style implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	final static Logger logger = LoggerFactory.getLogger(Style.class);
 
 	public enum Anchor {
 		TOP_LEFT,
@@ -15,6 +20,24 @@ public abstract class Style implements Serializable {
 		BOTTOM_RIGHT
 	}
 
+	public enum StyleType {
+		TEXT ("text"),
+		IMAGE ("image"),
+		SVG ("svg"),
+		LOGO ("logo"),
+		BLOCK ("block"),
+		BUTTON ("button");
+		
+		private String stringRep;
+		
+		private StyleType (String s) {
+			stringRep = s;
+		}
+		
+		public String toString () {
+			return stringRep;
+		}
+	}
 	
 	private int width;
 	private int height;
@@ -30,10 +53,34 @@ public abstract class Style implements Serializable {
 	private int dropShadowV;
 	private int dropShadowBlur;
 	
-	/* Likewise for opacity and multiply. */
+	/* Likewise for opacity and multiply. Opacity is stored as an integer
+	 * from 0 to 100. */
 	private int opacity;
 	private boolean multiply;
 
+	public Style () {
+		// Nothing to do; just needs to be explicit to be a super constructor.
+	}
+	
+	
+	/** Copy constructor. This needs to be invoked as a super() constructor
+	 *  from subclasses. */
+	public Style (Style s) {
+		width = s.width;
+		height = s.height;
+		model = s.model;
+		anchor = s.anchor;
+		offsetX = s.offsetX;
+		offsetY = s.offsetY;
+		dropShadowH = s.dropShadowH;
+		dropShadowV = s.dropShadowV;
+		dropShadowBlur = s.dropShadowBlur;
+		opacity = s.opacity;
+		multiply = s.multiply;
+	}
+	
+	/** Returns the kind of Style this is */
+	public abstract StyleType getStyleType ();
 	
 	/** Returns the name of the model field associated with this style.
 	 *  Will be null if there is no model associated with the style. 
@@ -63,10 +110,12 @@ public abstract class Style implements Serializable {
 	}
 	
 	public Anchor getAnchor () {
+		logger.debug ("getAnchor returning {}", (anchor == null? "null" : anchor.toString ()));
 		return anchor;
 	}
 	
 	public void setAnchor (Anchor a) {
+		logger.debug ("setAnchor {}", a.toString());
 		anchor = a;
 	}
 	
@@ -115,11 +164,16 @@ public abstract class Style implements Serializable {
 
 	
 	/** Opacity isn't defined for all styles, but we put it here since
-	 *  this isn't public code and it's easier. 
-	 */	public int getOpacity () {
+	 *  this isn't public code and it's easier. The value will range
+	 *  from 0 to 100.
+	 */	
+	public int getOpacity () {
 		return opacity;
 	}
 	
+	/** Set the opacity as a number from 0 to 100. Not applicable
+	 *  to all subclasses.
+	 */
 	public void setOpacity (int op) {
 		opacity = op;
 	}

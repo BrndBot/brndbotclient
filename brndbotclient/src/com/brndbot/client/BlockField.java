@@ -3,6 +3,10 @@ package com.brndbot.client;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.brndbot.client.style.BlockStyle;
+import com.brndbot.client.style.Style;
+import com.brndbot.client.style.Style.StyleType;
+
 public class BlockField extends ModelField {
 
 	private String color;
@@ -16,7 +20,7 @@ public class BlockField extends ModelField {
 	 *  from a Model's field. 
 	 */
 	public BlockField (BlockField modelf) {
-		super (modelf.name, StyleType.BLOCK);
+		super (modelf);
 		style = modelf.style;
 	}
 
@@ -24,8 +28,8 @@ public class BlockField extends ModelField {
 		return style;
 	}
 	
-	public void setStyle (BlockStyle s) {
-		style = s;
+	public void setStyle (Style s) {
+		style = (BlockStyle) s;
 	}
 	
 	public String getColor () {

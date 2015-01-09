@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.brndbot.client.Model;
 import com.brndbot.client.ModelField;
-import com.brndbot.client.ModelField.StyleType;
+import com.brndbot.client.style.Style.StyleType;
 
 /** This test relies on the files testfiles/testmodel1.xml
  *  and testfiles/testmodel2.xml */

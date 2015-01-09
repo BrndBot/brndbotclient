@@ -3,6 +3,10 @@ package com.brndbot.client;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.brndbot.client.style.Style;
+import com.brndbot.client.style.TextStyle;
+import com.brndbot.client.style.Style.StyleType;
+
 /** A TextField is a field of a promotion with specified style
  *  and text content.
  */
@@ -19,7 +23,7 @@ public class TextField extends ModelField {
 	 *  from a Model's field. 
 	 */
 	public TextField (TextField modelf) {
-		super (modelf.name, StyleType.TEXT);
+		super (modelf);
 		text = modelf.text;
 		style = modelf.style;	// do we need to copy-construct the style?
 	}
@@ -36,8 +40,8 @@ public class TextField extends ModelField {
 		return style;
 	}
 	
-	public void setStyle(TextStyle s) {
-		style = s;
+	public void setStyle(Style s) {
+		style = (TextStyle) s;
 	}
 	
 	@Override
