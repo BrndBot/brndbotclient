@@ -19,11 +19,17 @@ public class BlockFieldTest {
 	public void testCopyConstructor () {
 		BlockField tf = new BlockField ("name");
 		BlockStyle style = new BlockStyle ();
+		style.setColor ("#FFDD00");
 		tf.setStyle (style);
 		BlockField cloneField = new BlockField (tf);
 		assertEquals ("name", cloneField.getName());
 		BlockStyle cloneStyle = cloneField.getStyle();
 		assertNotNull (cloneStyle);
+		assertEquals ("#FFDD00", cloneStyle.getColor());
+		
+		//Check that the clone style can be changed without changing original
+		cloneStyle.setColor ("#001122");
+		assertEquals ("#FFDD00", style.getColor());
 	}
 	
 	@Test

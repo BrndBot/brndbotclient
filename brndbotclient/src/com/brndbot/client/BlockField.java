@@ -21,7 +21,7 @@ public class BlockField extends ModelField {
 	 */
 	public BlockField (BlockField modelf) {
 		super (modelf);
-		style = modelf.style;
+		style = new BlockStyle(modelf.style);
 	}
 
 	public BlockStyle getStyle () {

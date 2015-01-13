@@ -23,7 +23,7 @@ public class SVGField extends ModelField {
 	public SVGField (SVGField modelf) {
 		super (modelf);
 		svg = modelf.svg;		// safe only if the SVG is immutable
-		style = modelf.style;
+		style = new SVGStyle(modelf.style);
 	}
 	
 	/** Returns the SVG which has been set for this field, if any.

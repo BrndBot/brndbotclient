@@ -35,6 +35,7 @@ public class TextStyle extends Style {
 		alignment = s.alignment;
 		textColor = s.textColor;
 		typeface = s.typeface;
+		pointSize = s.pointSize;
 	}
 	
 	public String getTypeface () {
@@ -84,6 +85,10 @@ public class TextStyle extends Style {
 	
 	public boolean isDropShadow () {
 		return dropShadow;
+	}
+	
+	public void setDropShadow (boolean b) {
+		dropShadow = b;
 	}
 	
 	public String getTextColor () {

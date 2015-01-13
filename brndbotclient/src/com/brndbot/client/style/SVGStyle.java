@@ -27,10 +27,12 @@ public class SVGStyle extends Style {
 		return StyleType.SVG;
 	}
 
+	/** Get the SVG element. */
 	public Element getSVG () {
 		return svg;
 	}
 	
+	/** Set the SVG element. This does not create a new element. */
 	public void setSVG (Element svg) {
 		this.svg = svg;
 	}

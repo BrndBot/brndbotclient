@@ -25,7 +25,7 @@ public class TextField extends ModelField {
 	public TextField (TextField modelf) {
 		super (modelf);
 		text = modelf.text;
-		style = modelf.style;	// do we need to copy-construct the style?
+		style = new TextStyle(modelf.style);
 	}
 
 	public String getText () {

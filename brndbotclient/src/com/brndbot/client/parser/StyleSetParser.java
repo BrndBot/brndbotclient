@@ -331,6 +331,8 @@ public class StyleSetParser {
 	/* Convert a palette selector to a number. We use 1-based indexing.
 	 * -1 means it's customcolor or something invalid. */
 	private int paletteSelToIndex (String sel) {
+		if (sel == null)
+			return -1;
 		switch (sel) {
 		case "paletteone":
 			return 1;
