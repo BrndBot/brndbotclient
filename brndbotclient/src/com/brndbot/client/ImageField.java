@@ -22,7 +22,9 @@ public class ImageField extends ModelField {
 	public ImageField (ImageField modelf) {
 		super (modelf);
 		imagePath = modelf.imagePath;
-		style = new ImageStyle(modelf.style);
+		if (modelf.style != null) {
+			style = new ImageStyle(modelf.style);
+		}
 	}
 	
 	/** Returns the field's image path if not null; otherwise

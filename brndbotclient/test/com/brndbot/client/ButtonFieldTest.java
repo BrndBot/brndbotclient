@@ -27,6 +27,14 @@ public class ButtonFieldTest {
 	}
 
 	@Test
+	public void testCopyOfStylelessField () {
+		ButtonField bf = new ButtonField ("name");
+		ButtonField cloneField = new ButtonField (bf);
+		assertEquals ("name", cloneField.getName ());
+		assertNull (cloneField.getStyle());
+	}
+	
+	@Test
 	public void testJSON () throws Exception {
 		ButtonField tf = new ButtonField ("name1");
 		ButtonStyle style = new ButtonStyle ();

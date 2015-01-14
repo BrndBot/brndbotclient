@@ -33,6 +33,14 @@ public class SVGFieldTest {
 	}
 
 	@Test
+	public void testCopyOfStylelessField () {
+		SVGField bf = new SVGField ("name");
+		SVGField cloneField = new SVGField (bf);
+		assertEquals ("name", cloneField.getName ());
+		assertNull (cloneField.getStyle());
+	}
+	
+	@Test
 	public void testJSON () throws Exception {
 		SVGField tf = new SVGField ("name1");
 		SVGStyle style = new SVGStyle ();

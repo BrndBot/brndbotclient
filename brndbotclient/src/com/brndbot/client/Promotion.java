@@ -54,6 +54,7 @@ public class Promotion implements Serializable {
 			}
 		} catch (Exception e) {
 			logger.error ("Incompatible style for model {}", m.getName());
+			e.printStackTrace();
 			logger.error (e.getClass().getName());
 		}
 	}
@@ -95,6 +96,7 @@ public class Promotion implements Serializable {
 	public ModelField getNamedField (String name) {
 		logger.debug ("getNamedField: {}", name);
 		for (ModelField f : content) {
+			logger.debug ("Checking field {}", f.getName());
 			if (name.equals (f.getName())) {
 				logger.debug ("Found a field");
 				return f;

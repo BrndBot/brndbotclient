@@ -19,7 +19,9 @@ public class ButtonField extends ModelField {
 	 *  from a Model's field. 
 	 */	public ButtonField (ButtonField modelf) {
 		 super (modelf);
-		 style = new ButtonStyle(modelf.style);
+		 if (modelf.style != null) {
+			 style = new ButtonStyle(modelf.style);
+		 }
 	 }
 	 
 	public ButtonStyle getStyle () {

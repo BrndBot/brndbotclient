@@ -17,11 +17,11 @@ public class BlockFieldTest {
 	
 	@Test
 	public void testCopyConstructor () {
-		BlockField tf = new BlockField ("name");
+		BlockField bf = new BlockField ("name");
 		BlockStyle style = new BlockStyle ();
 		style.setColor ("#FFDD00");
-		tf.setStyle (style);
-		BlockField cloneField = new BlockField (tf);
+		bf.setStyle (style);
+		BlockField cloneField = new BlockField (bf);
 		assertEquals ("name", cloneField.getName());
 		BlockStyle cloneStyle = cloneField.getStyle();
 		assertNotNull (cloneStyle);
@@ -33,10 +33,18 @@ public class BlockFieldTest {
 	}
 	
 	@Test
+	public void testCopyOfStylelessField () {
+		BlockField bf = new BlockField ("name");
+		BlockField cloneField = new BlockField (bf);
+		assertEquals ("name", cloneField.getName ());
+		assertNull (cloneField.getStyle());
+	}
+	
+	@Test
 	public void testJSON () throws Exception {
 		BlockField tf = new BlockField ("name1");
-		BlockStyle style = new BlockStyle ();
-		assertNotNull (style);
+//		BlockStyle style = new BlockStyle ();
+//		assertNotNull (style);
 		JSONObject json = tf.toJSON();
 		assertEquals ("name1", json.get("name"));
 		assertEquals ("block", json.get("styleType"));

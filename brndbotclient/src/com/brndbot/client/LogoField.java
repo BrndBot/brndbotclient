@@ -20,7 +20,9 @@ public class LogoField extends ModelField {
 	 */
 	public LogoField (LogoField modelf) {
 		super(modelf);
-		style = modelf.style;
+		if (modelf.style != null) {
+			style = modelf.style;
+		}
 	}
 	
 	public LogoStyle getStyle () {

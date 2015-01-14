@@ -31,6 +31,14 @@ public class TextFieldTest {
 	}
 	
 	@Test
+	public void testCopyOfStylelessField () {
+		TextField bf = new TextField ("name");
+		TextField cloneField = new TextField (bf);
+		assertEquals ("name", cloneField.getName ());
+		assertNull (cloneField.getStyle());
+	}
+	
+	@Test
 	public void testJSON () throws Exception {
 		TextField tf = new TextField ("name1");
 		tf.setText ("More text");

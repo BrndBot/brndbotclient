@@ -31,6 +31,14 @@ public class ImageFieldTest {
 	}
 
 	@Test
+	public void testCopyOfStylelessField () {
+		ImageField bf = new ImageField ("name");
+		ImageField cloneField = new ImageField (bf);
+		assertEquals ("name", cloneField.getName ());
+		assertNull (cloneField.getStyle());
+	}
+	
+	@Test
 	public void testJSON () throws Exception {
 		ImageField tf = new ImageField ("name1");
 		ImageStyle style = new ImageStyle ();
