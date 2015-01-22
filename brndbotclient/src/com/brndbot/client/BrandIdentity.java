@@ -38,6 +38,7 @@ public class BrandIdentity implements Serializable {
 	}
 	
 	public Map<String, StyleSet> getStyleSetsForModel (String modelName) {
+		logger.debug ("getStyleSetsForModel {}", modelName);
 		return styleSetMap.get(modelName);
 	}
 	

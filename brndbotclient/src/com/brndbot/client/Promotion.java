@@ -72,6 +72,13 @@ public class Promotion implements Serializable {
 		}
 	}
 	
+	/** Populate the Promotion from the model. This is done when there is
+	 *  no prototype data, e.g., in the Null Client Interface. 
+	 */
+	public void populateFromModel () {
+		// TODO stub
+	}
+	
 	public String getName () {
 		return name;
 	}
