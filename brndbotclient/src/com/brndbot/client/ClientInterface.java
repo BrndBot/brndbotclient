@@ -26,7 +26,7 @@ public interface ClientInterface extends Serializable {
 	 *  models. The implementation should avoid making a large collection of models
 	 *  into sesson data.
 	 */
-	public ModelCollection getModels ();
+//	public ModelCollection getModels ();
 	
 	/** Returns a Map of names to PromotionPrototypes for a given Model */
 	public Map<String,Promotion> getPromotionPrototypes (String modelName);
