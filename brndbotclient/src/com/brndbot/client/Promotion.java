@@ -123,16 +123,17 @@ public class Promotion implements Serializable {
 		if (model != null) {
 			val.put ("modelName", model.getName());
 		}
+		else {
+			logger.error ("Promotion has no model");
+			return null;
+		}		
 		if (name != null) {
 			val.put ("name", name);
 		}
 		if (styleSet != null) {
 			val.put ("styleSetName", styleSet.getName());
 		}
-		if (model == null) {
-			logger.error ("PromotionPrototype has no model");
-			return null;
-		}
+
 		// Use content by preference, or else the model
 		List<ModelField> fields = content;
 		if (content == null)

@@ -1,5 +1,8 @@
 package com.brndbot.client.style;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class LogoStyle extends Style {
 
@@ -17,4 +20,13 @@ public class LogoStyle extends Style {
 		return StyleType.LOGO;
 	}
 
+	
+	/** Convert this Style to a JSON object */
+	@Override
+	public JSONObject toJSON () throws JSONException {
+		JSONObject val = new JSONObject ();
+		// Only the standard style fields are necessary
+		putStandardJSONFields (val);
+		return val;				
+	}
 }

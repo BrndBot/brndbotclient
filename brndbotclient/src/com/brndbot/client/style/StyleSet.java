@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,6 +52,22 @@ public class StyleSet implements Serializable {
 		for (Style styl : orig.styles) {
 			styles.add (copyStyle (styl));
 		}
+	}
+	
+	public JSONObject toJSON () throws JSONException {
+		JSONObject val = new JSONObject();
+		val.put ("name", name);
+		val.put ("model", model);
+		val.put ("organization", organization);
+		val.put ("brand", brand);
+		val.put ("width", width);
+		val.put ("height", height);
+		JSONArray jStyleArray = new JSONArray ();
+		for (Style style : styles) {
+			JSONObject jStyle = style.toJSON();
+			
+		}
+		return val;		// TODO stub
 	}
 	
 	public String getName () {

@@ -1,5 +1,8 @@
 package com.brndbot.client.style;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class BlockStyle extends Style {
 
 
@@ -20,6 +23,16 @@ public class BlockStyle extends Style {
 	@Override
 	public StyleType getStyleType () {
 		return StyleType.BLOCK;
+	}
+	
+	/** Convert this Style to a JSON object */
+	@Override
+	public JSONObject toJSON () throws JSONException {
+		JSONObject val = new JSONObject ();
+		putStandardJSONFields (val);
+		val.put ("color", color);
+		val.put ("paletteSelection", paletteSelection);
+		return val;				
 	}
 
 	public String getColor () {

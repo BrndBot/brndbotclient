@@ -2,6 +2,8 @@ package com.brndbot.client.style;
 
 import java.io.Serializable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,6 +81,12 @@ public abstract class Style implements Serializable {
 		multiply = s.multiply;
 	}
 	
+	/** Convert this Style to a JSON object. Override this to do anything. */
+	public JSONObject toJSON () throws JSONException {
+		JSONObject val = new JSONObject ();
+		return val;				// TODO stub
+	}
+	
 	/** Returns the kind of Style this is */
 	public abstract StyleType getStyleType ();
 	
@@ -110,7 +118,7 @@ public abstract class Style implements Serializable {
 	}
 	
 	public Anchor getAnchor () {
-		logger.debug ("getAnchor returning {}", (anchor == null? "null" : anchor.toString ()));
+		//logger.debug ("getAnchor returning {}", (anchor == null? "null" : anchor.toString ()));
 		return anchor;
 	}
 	
@@ -186,5 +194,16 @@ public abstract class Style implements Serializable {
 	
 	public void setMultiply (boolean m) {
 		multiply = m;
+	}
+	
+	/** Fill out standard fields in a JSON object */
+	public void putStandardJSONFields (JSONObject obj) throws JSONException {
+		obj.put ("styleType", getStyleType().toString ());
+		obj.put ("model", model);
+		obj.put ("width", width);
+		obj.put ("height", height);
+		obj.put ("offsetX", offsetX);
+		obj.put ("offsetY", offsetY);
+		obj.put ("anchor", anchor.toString());
 	}
 }
