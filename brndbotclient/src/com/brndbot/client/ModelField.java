@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.brndbot.client.style.Style;
 import com.brndbot.client.style.Style.StyleType;
+import com.brndbot.client.style.StyleSet;
 
 /** A ModelField is (logically enough) a field of a Model. It 
  *  has a name and type. ModelField can be used on its own but
@@ -69,7 +70,9 @@ public abstract class ModelField {
 	}
 	
 	
-	/** Represent a ModelField as a JSON object. */
+	/** Represent a ModelField as a JSON object. 
+	 *  TODO do we need to pass a StyleSet as an argument?
+	 */
 	public JSONObject toJSON () throws JSONException {
 		JSONObject val = new JSONObject();
 		val.put ("name", name);

@@ -8,6 +8,8 @@ import java.util.List;
 
 
 
+
+import org.json.JSONArray;
 //import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -132,6 +134,8 @@ public class Promotion implements Serializable {
 		}
 		if (styleSet != null) {
 			val.put ("styleSetName", styleSet.getName());
+			val.put ("width", styleSet.getWidth());
+			val.put ("height", styleSet.getHeight());
 		}
 
 		// Use content by preference, or else the model
@@ -145,8 +149,24 @@ public class Promotion implements Serializable {
 		// Each field gets a JSON value which is its name prefixed by "field"
 		// This will get messy in the Kendo template. We'll need to use the
 		// model to build the template! We may need to set up some conventions.
+		JSONArray jsonFields = new JSONArray ();
+		String desc = null;
 		for (ModelField field : fields) {
-			val.put ("field" + field.getName(), field.toJSON());
+			jsonFields.put (field.toJSON());
+			// Slight crock to make the description easily available
+			logger.debug ("Checking field " + field.getName());
+			if (field instanceof TextField && "description".equals (field.getName().toLowerCase())) {
+				TextField tField = (TextField) field;
+				desc = tField.getText ();
+				if (desc != null) {
+					val.put ("description", tField.getText ());
+					break;
+				}
+			}
 		}
+		// If no description...
+		if (desc == null)
+			val.put ("description", "Default");
+		val.put ("fields", jsonFields);
 		return val;
 	}}

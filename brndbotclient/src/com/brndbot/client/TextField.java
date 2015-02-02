@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.brndbot.client.style.Style;
+import com.brndbot.client.style.StyleSet;
 import com.brndbot.client.style.TextStyle;
 import com.brndbot.client.style.Style.StyleType;
 
@@ -49,7 +50,10 @@ public class TextField extends ModelField {
 	@Override
 	public JSONObject toJSON() throws JSONException {
 		JSONObject json = super.toJSON();
-		json.put ("text", text);
+		if (text == null)
+			json.put ("text", "Default");		// just to have something
+		else
+			json.put ("text", text);
 		return json;
 	}
 }
