@@ -71,12 +71,14 @@ public abstract class ModelField {
 	
 	
 	/** Represent a ModelField as a JSON object. 
-	 *  TODO do we need to pass a StyleSet as an argument?
+	 *  Style data is not included, so 
+	 *  JavaScript needs to apply a style before drawing.
 	 */
 	public JSONObject toJSON () throws JSONException {
 		JSONObject val = new JSONObject();
 		val.put ("name", name);
 		val.put ("styleType", styleType.toString ());
+		
 		return val;
 	}
 }

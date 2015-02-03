@@ -65,8 +65,9 @@ public class StyleSet implements Serializable {
 		JSONArray jStyleArray = new JSONArray ();
 		for (Style style : styles) {
 			JSONObject jStyle = style.toJSON();
-			
+			jStyleArray.put (jStyle);
 		}
+		val.put ("styles", jStyleArray);
 		return val;		// TODO stub
 	}
 	

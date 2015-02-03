@@ -130,6 +130,9 @@ public class StyleSetParser {
 			parseStyles (styles, ss);
 			return ss;
 		} catch (Exception e) {
+			e.printStackTrace();
+			if (e instanceof ClientException)
+				throw (ClientException) e;
 			throw new ClientException (e);
 		}
 	}
@@ -138,23 +141,24 @@ public class StyleSetParser {
 		for (Element styleElem : styles) {
 			// Each "style" element will have a single child, which is named
 			// for one of the style types.
+			String fieldName = styleElem.getAttributeValue("field");
 			Element styleChild = styleElem.getChildren().get(0);
 			String styleName = styleChild.getName();
 			switch (styleName) {
 			case "text":
-				addTextStyle (styleChild, ss);
+				addTextStyle (styleChild, ss, fieldName);
 				break;
 			case "image":
-				addImageStyle (styleChild, ss);
+				addImageStyle (styleChild, ss, fieldName);
 				break;
 			case "svgdata":
-				addSVGStyle (styleChild, ss);
+				addSVGStyle (styleChild, ss, fieldName);
 				break;
 			case "block":
-				addBlockStyle (styleChild, ss);
+				addBlockStyle (styleChild, ss, fieldName);
 				break;
 			case "logo":
-				addLogoStyle (styleChild, ss);
+				addLogoStyle (styleChild, ss, fieldName);
 				break;
 			default:
 				throw (new ClientException ("Unknown style type " + styleName));
@@ -195,9 +199,10 @@ public class StyleSetParser {
 		s.setOffsetY (offset.getY());
 	}
 	
-	private void addTextStyle (Element textElem, StyleSet ss) throws ClientException {
+	private void addTextStyle (Element textElem, StyleSet ss, String fieldName) throws ClientException {
 		logger.debug ("addTextStyle");
 		TextStyle ts = new TextStyle();
+		ts.setFieldName (fieldName);
 		getCommonElements (textElem, ts);
 		
 		String alignText = textElem.getChildText("alignment");
@@ -246,8 +251,9 @@ public class StyleSetParser {
 		ss.addStyle (ts);
 	}
 
-	private void addImageStyle (Element imageElem, StyleSet ss) throws ClientException{
+	private void addImageStyle (Element imageElem, StyleSet ss, String fieldName) throws ClientException{
 		ImageStyle is = new ImageStyle();
+		is.setFieldName (fieldName);
 		getCommonElements (imageElem, is);
 		is.setImagePath(imageElem.getChildText("imagepath"));
 		is.setOpacity (Integer.parseInt(imageElem.getChildText("opacity")));
@@ -257,8 +263,9 @@ public class StyleSetParser {
 	}
 
 	/* This one could be tricky. */
-	private void addSVGStyle (Element svgElem, StyleSet ss) throws ClientException {
+	private void addSVGStyle (Element svgElem, StyleSet ss, String fieldName) throws ClientException {
 		SVGStyle svgs = new SVGStyle();
+		svgs.setFieldName (fieldName);
 		getCommonElements (svgElem, svgs);
 		// Are there namespace issues here?
 		Element svg = svgElem.getChild ("svg", svgNamespace);
@@ -266,8 +273,9 @@ public class StyleSetParser {
 		ss.addStyle (svgs);
 	}
 
-	private void addBlockStyle (Element blockElem, StyleSet ss) throws ClientException {
+	private void addBlockStyle (Element blockElem, StyleSet ss, String fieldName) throws ClientException {
 		BlockStyle bs = new BlockStyle();
+		bs.setFieldName (fieldName);
 		getCommonElements (blockElem, bs);
 		bs.setOpacity (Integer.parseInt(blockElem.getChildText("opacity")));
 		String pal = blockElem.getChildText ("palette");
@@ -287,8 +295,9 @@ public class StyleSetParser {
 		ss.addStyle (bs);
 	}
 
-	private void addLogoStyle (Element logoElem, StyleSet ss) throws ClientException {
+	private void addLogoStyle (Element logoElem, StyleSet ss, String fieldName) throws ClientException {
 		LogoStyle ls = new LogoStyle();
+		ls.setFieldName (fieldName);
 		getCommonElements (logoElem, ls);
 		ss.addStyle (ls);
 	}

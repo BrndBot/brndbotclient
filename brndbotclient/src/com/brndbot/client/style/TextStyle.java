@@ -1,5 +1,8 @@
 package com.brndbot.client.style;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /* A TextStyle defines the presentation of a text field. */
 public class TextStyle extends Style {
 
@@ -21,6 +24,7 @@ public class TextStyle extends Style {
 	private boolean dropShadow;
 	private Alignment alignment;
 	private String textColor;
+	private String text;
 	
 	public TextStyle () {
 		
@@ -38,17 +42,31 @@ public class TextStyle extends Style {
 		pointSize = s.pointSize;
 	}
 	
+	@Override
+	public StyleType getStyleType () {
+		return StyleType.TEXT;
+	}
+	
+	/** Convert this Style to a JSON object */
+	@Override
+	public JSONObject toJSON () throws JSONException {
+		JSONObject val = new JSONObject ();
+		putStandardJSONFields (val);
+		val.put ("text", text);
+		val.put ("italic", italic);
+		val.put ("bold", bold);
+		val.put ("typeface", typeface);
+		val.put ("pointSize", pointSize);
+		val.put ("textColor", textColor);
+		return val;				
+	}
+	
 	public String getTypeface () {
 		return typeface;
 	}
 	
 	public void setTypeface (String f) {
 		typeface = f;
-	}
-	
-	@Override
-	public StyleType getStyleType () {
-		return StyleType.TEXT;
 	}
 	
 	/** TODO have to initialize this somehow. Do I want a big 

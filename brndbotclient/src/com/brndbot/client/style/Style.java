@@ -41,6 +41,8 @@ public abstract class Style implements Serializable {
 		}
 	}
 	
+	private String fieldName;	// the field the style affects, if any
+	
 	private int width;
 	private int height;
 	private String model;
@@ -99,6 +101,15 @@ public abstract class Style implements Serializable {
 	
 	public void setModel(String m) {
 		model = m;
+	}
+	
+	/** Returns the field name associated with the style. May be null. */
+	public String getFieldName () {
+		return fieldName;
+	}
+	
+	public void setFieldName (String s) {
+		fieldName = s;
 	}
 	
 	public int getWidth () {
@@ -198,6 +209,8 @@ public abstract class Style implements Serializable {
 	
 	/** Fill out standard fields in a JSON object */
 	public void putStandardJSONFields (JSONObject obj) throws JSONException {
+		if (fieldName != null)
+			obj.put ("fieldName", fieldName);
 		obj.put ("styleType", getStyleType().toString ());
 		obj.put ("model", model);
 		obj.put ("width", width);
