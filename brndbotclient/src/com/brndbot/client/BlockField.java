@@ -40,6 +40,10 @@ public class BlockField extends ModelField {
 	
 	@Override
 	public JSONObject toJSON() throws JSONException {
-		return super.toJSON();
+		JSONObject json = super.toJSON();
+		if (color != null) {
+			json.put ("color", color);
+		}
+		return json;
 	}
 }

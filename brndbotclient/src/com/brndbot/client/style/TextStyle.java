@@ -25,6 +25,7 @@ public class TextStyle extends Style {
 	private Alignment alignment;
 	private String textColor;
 	private String text;
+	private String defaultText;
 	
 	public TextStyle () {
 		
@@ -53,6 +54,8 @@ public class TextStyle extends Style {
 		JSONObject val = new JSONObject ();
 		putStandardJSONFields (val);
 		val.put ("text", text);
+		if (defaultText != null)
+			val.put ("defaultText", defaultText);
 		val.put ("italic", italic);
 		val.put ("bold", bold);
 		val.put ("typeface", typeface);
@@ -69,9 +72,14 @@ public class TextStyle extends Style {
 		typeface = f;
 	}
 	
-	/** TODO have to initialize this somehow. Do I want a big 
-	 *  hairy constructor or a bunch of initializers? Latter is less
-	 *  error prone, if more verbose. */
+	public String getDefaultText () {
+		return defaultText;
+	}
+	
+	public void setDefaultText (String s) {
+		defaultText = s;
+	}
+	
 	
 	/** Return the point size as an integer. If it turns
 	 *  out that we want tenths of a point, change this to a double

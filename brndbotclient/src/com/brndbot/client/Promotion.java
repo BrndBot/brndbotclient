@@ -9,6 +9,7 @@ import java.util.List;
 
 
 
+
 import org.json.JSONArray;
 //import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.brndbot.client.style.Style;
+import com.brndbot.client.style.Style.StyleType;
 import com.brndbot.client.style.StyleSet;
 
 /** A Promotion defines the fields of a promotion using a
@@ -78,7 +80,17 @@ public class Promotion implements Serializable {
 	 *  no prototype data, e.g., in the Null Client Interface. 
 	 */
 	public void populateFromModel () {
-		// TODO stub
+		for (ModelField field : content) {
+			StyleType modelType = field.getStyleType();
+			switch (modelType) {
+			case TEXT:
+				TextField tField = (TextField) field;
+				tField.setText(tField.getName());
+				break;
+			default:
+				break;
+			}
+		}
 	}
 	
 	public String getName () {
@@ -169,4 +181,16 @@ public class Promotion implements Serializable {
 			val.put ("description", "Default");
 		val.put ("fields", jsonFields);
 		return val;
-	}}
+	}
+	
+	@Override
+	public String toString () {
+		String val;
+		try {
+			val = "Promotion: " + toJSON().toString();
+		} catch (Exception e) {
+			val = "Promotion, could not convert to JSON";
+		}
+		return val;
+	}
+}

@@ -19,7 +19,21 @@ public abstract class Style implements Serializable {
 		TOP_LEFT,
 		TOP_RIGHT,
 		BOTTOM_LEFT,
-		BOTTOM_RIGHT
+		BOTTOM_RIGHT;
+		
+		public String toString () {
+			switch (this) {
+			case TOP_LEFT:
+				return "TL";
+			case TOP_RIGHT:
+				return "TR";
+			case BOTTOM_LEFT:
+				return "BL";
+			case BOTTOM_RIGHT:
+				return "BR";
+			}
+			return null;		// TODO
+		}
 	}
 
 	public enum StyleType {

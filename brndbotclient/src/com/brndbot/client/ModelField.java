@@ -81,4 +81,15 @@ public abstract class ModelField {
 		
 		return val;
 	}
+	
+	/** toString for debugging convenience. toJSON is as good as anything. */
+	public String toString () {
+		String val;
+		try {
+			val = "ModelField: " + toJSON().toString();
+		} catch (Exception e) {
+			val = "ModelField, could not JSONize";
+		}
+		return val;
+	}
 }

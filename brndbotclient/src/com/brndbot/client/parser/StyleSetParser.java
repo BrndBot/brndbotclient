@@ -247,6 +247,8 @@ public class StyleSetParser {
 			ts.setDropShadowV(ds.v);
 			ts.setDropShadowBlur(ds.blur);
 		}
+		String defaultText = textElem.getChildText ("default");
+		ts.setDefaultText (defaultText);
 
 		ss.addStyle (ts);
 	}
@@ -277,7 +279,12 @@ public class StyleSetParser {
 		BlockStyle bs = new BlockStyle();
 		bs.setFieldName (fieldName);
 		getCommonElements (blockElem, bs);
-		bs.setOpacity (Integer.parseInt(blockElem.getChildText("opacity")));
+		String opacityString = blockElem.getChildText("opacity");
+		if (opacityString != null) {
+			try {
+				bs.setOpacity (Integer.parseInt(opacityString));
+			} catch (Exception e) {}
+		}
 		String pal = blockElem.getChildText ("palette");
 		int palidx = paletteSelToIndex (pal);
 		logger.debug ("Palette {}", pal);

@@ -100,4 +100,28 @@ public class Model implements Comparable<Model> {
 	public int compareTo(Model m) {
 		return this.name.compareTo(m.name);
 	}
+	
+	/** A toString function as an aid to debugging */
+	@Override
+	public String toString () {
+		StringBuilder sb = new StringBuilder ("Model: ");
+		sb.append (" name: ");
+		sb.append (name);
+		sb.append ("   description: ");
+		sb.append (description);
+		sb.append ("   category: ");
+		sb.append (category);
+		sb.append ("   organization: ");
+		sb.append (organization);
+		sb.append ("   fields: ");
+		if (fields == null)
+			sb.append ("null");
+		else {
+			for (ModelField f : fields) {
+				sb.append (f.toString ());
+				sb.append ("  ///  ");
+			}
+		}
+		return sb.toString();
+	}
 }
