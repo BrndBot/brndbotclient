@@ -13,7 +13,21 @@ public class TextStyle extends Style {
 		LEFT,
 		RIGHT,
 		CENTER,
-		JUSTIFIED
+		JUSTIFIED;
+		
+		public String toString () {
+			switch (this) {
+			case LEFT:
+			default:
+				return "left";
+			case RIGHT:
+				return "right";
+			case CENTER:
+				return "center";
+			case JUSTIFIED:
+				return "justified";
+			}
+		}
 	}
 	
 	private String typeface;
@@ -61,6 +75,7 @@ public class TextStyle extends Style {
 		val.put ("typeface", typeface);
 		val.put ("pointSize", pointSize);
 		val.put ("textColor", textColor);
+		val.put ("alignment", alignment.toString());
 		return val;				
 	}
 	
