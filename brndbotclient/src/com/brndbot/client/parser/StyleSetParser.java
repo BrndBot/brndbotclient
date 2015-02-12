@@ -236,10 +236,15 @@ public class StyleSetParser {
 		} catch (Exception e) {
 			logger.warn ("Bad point size, defaulting to 12");
 		}
-		String color = (textElem.getChildText("textcolor"));
+		ts.setPointSize(ptSize);
+
+		String color = textElem.getChildText("textcolor");
 		if (color != null)
 			ts.setTextColor (color);
-		ts.setPointSize(ptSize);
+		
+		String typeface = textElem.getChildText("font");
+		if (typeface != null)
+			ts.setTypeface(typeface);
 		
 		DropShadow ds = parseDropShadow ("dropShadow", textElem);
 		if (ds != null) {
