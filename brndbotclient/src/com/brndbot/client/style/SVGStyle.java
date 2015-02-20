@@ -1,6 +1,8 @@
 package com.brndbot.client.style;
 
 import org.jdom2.Element;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *  Tricky question here: How do we store the SVG? 
@@ -37,4 +39,12 @@ public class SVGStyle extends Style {
 		this.svg = svg;
 	}
 
+	/** Convert this Style to a JSON object */
+	@Override
+	public JSONObject toJSON () throws JSONException {
+		JSONObject val = new JSONObject ();
+		putStandardJSONFields (val);
+		val.put ("svgdata", svg);
+		return val;				
+	}
 }
