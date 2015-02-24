@@ -3,6 +3,8 @@ package com.brndbot.client.style;
 import static org.junit.Assert.*;
 
 import org.jdom2.Element;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,6 +13,9 @@ import com.brndbot.client.style.Style.Anchor;
 public class SVGStyleTest {
 	
 	private SVGStyle svgExample;
+	
+	XMLOutputter outputter = new XMLOutputter(Format.getCompactFormat());
+
 
 	@Before
 	public void setUp() throws Exception {
@@ -21,7 +26,7 @@ public class SVGStyleTest {
 	public void testCopy() {
 		SVGStyle ss = new SVGStyle (svgExample);
 		assertEquals ("model1", ss.getModel());
-		assertEquals ("svg", ss.getSVG().getName());
+		assertTrue (ss.getSVG().indexOf("<svg") >= 0);
 		assertEquals (ss.getWidth(), 30);
 		assertEquals (ss.getHeight(), 40);
 		assertEquals (ss.getAnchor (), Anchor.TOP_RIGHT);
@@ -59,7 +64,7 @@ public class SVGStyleTest {
 		SVGStyle ss = new SVGStyle();
 		ss.setModel ("model1");
 		Element svg = new Element ("svg");
-		ss.setSVG(svg);
+		ss.setSVG(outputter.outputString(svg));
 		ss.setWidth (30);
 		ss.setHeight (40);
 		ss.setAnchor (Anchor.TOP_RIGHT);

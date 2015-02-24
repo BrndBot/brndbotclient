@@ -7,6 +7,8 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +29,9 @@ import com.brndbot.client.style.TextStyle;
 public class StyleSetParser {
 
 	final static Logger logger = LoggerFactory.getLogger(StyleSetParser.class);
-	
+
+	XMLOutputter outputter = new XMLOutputter(Format.getCompactFormat());
+
 	private final static Namespace svgNamespace = 
 			Namespace.getNamespace ("http://www.w3.org/2000/svg");
 	
@@ -144,6 +148,7 @@ public class StyleSetParser {
 			String fieldName = styleElem.getAttributeValue("field");
 			Element styleChild = styleElem.getChildren().get(0);
 			String styleName = styleChild.getName();
+			logger.debug ("parseStyles, styleName = {}", styleName);
 			switch (styleName) {
 			case "text":
 				addTextStyle (styleChild, ss, fieldName);
@@ -271,12 +276,17 @@ public class StyleSetParser {
 
 	/* This one could be tricky. */
 	private void addSVGStyle (Element svgElem, StyleSet ss, String fieldName) throws ClientException {
+		logger.debug ("addSVGStyle, fieldName = {}", fieldName);
 		SVGStyle svgs = new SVGStyle();
 		svgs.setFieldName (fieldName);
 		getCommonElements (svgElem, svgs);
-		// Are there namespace issues here?
+		// Are there namespace issues here? Accept either and SVG namespace
+		// element or a default namespace element.
 		Element svg = svgElem.getChild ("svg", svgNamespace);
-		svgs.setSVG(svg);
+		if (svg == null)
+			svg = svgElem.getChild ("svg");
+		if (svg != null)
+			svgs.setSVG(elementToString(svg));
 		ss.addStyle (svgs);
 	}
 
@@ -366,5 +376,10 @@ public class StyleSetParser {
 		default:
 			return -1;
 		}
+	}
+	
+	/* Convert an svg (or other) element to a compact formatted string. */
+	private String elementToString (Element elem) {
+		return outputter.outputString (elem);
 	}
 }

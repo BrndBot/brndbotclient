@@ -10,7 +10,7 @@ import com.brndbot.client.style.Style.StyleType;
 
 public class SVGField extends ModelField {
 
-	private Element svg;
+	private String svg;
 	private SVGStyle style;
 	
 	public SVGField(String name) {
@@ -30,14 +30,14 @@ public class SVGField extends ModelField {
 	
 	/** Returns the SVG which has been set for this field, if any.
 	 *  If it's null, returns the style's SVG. */
-	public Element getSVG () {
+	public String getSVG () {
 		if (svg != null) {
 			return svg;
 		}
 		else return style.getSVG();
 	}
 	
-	public void setSVG(Element s) {
+	public void setSVG(String s) {
 		svg = s;
 	}
 	

@@ -64,6 +64,7 @@ public class StyleSet implements Serializable {
 		val.put ("height", height);
 		JSONArray jStyleArray = new JSONArray ();
 		for (Style style : styles) {
+			logger.debug ("toJSON: Adding style of type " + style.getStyleType());
 			JSONObject jStyle = style.toJSON();
 			jStyleArray.put (jStyle);
 		}

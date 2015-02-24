@@ -13,8 +13,8 @@ public class SVGStyle extends Style {
 
 	private static final long serialVersionUID = 1L;
 
-	/** The SVG content, in JDOM form */
-	private Element svg;
+	/** The SVG content, as a string */
+	private String svg;
 	
 	public SVGStyle () {
 	}
@@ -30,21 +30,22 @@ public class SVGStyle extends Style {
 	}
 
 	/** Get the SVG element. */
-	public Element getSVG () {
+	public String getSVG () {
 		return svg;
 	}
 	
-	/** Set the SVG element. This does not create a new element. */
-	public void setSVG (Element svg) {
+	/** Set the SVG element, which is a formatted XML string. */
+	public void setSVG (String svg) {
 		this.svg = svg;
 	}
 
 	/** Convert this Style to a JSON object */
 	@Override
 	public JSONObject toJSON () throws JSONException {
+		logger.debug ("SVGStyle.toJSON");
 		JSONObject val = new JSONObject ();
 		putStandardJSONFields (val);
-		val.put ("svgdata", svg);
+		val.put ("svg", svg);
 		return val;				
 	}
 }

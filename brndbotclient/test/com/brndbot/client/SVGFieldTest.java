@@ -19,8 +19,7 @@ public class SVGFieldTest {
 	@Test
 	public void testCopyConstructor () {
 		SVGField tf = new SVGField ("name");
-		Element svgElement = new Element ("svg");
-		svgElement.addContent ("<svg/>");
+		String svgElement = "<svg/>";
 		tf.setSVG(svgElement);
 		SVGStyle style = new SVGStyle ();
 		tf.setStyle (style);
@@ -28,8 +27,8 @@ public class SVGFieldTest {
 		assertEquals ("name", cloneField.getName());
 		SVGStyle cloneStyle = cloneField.getStyle();
 		assertNotNull (cloneStyle);
-		Element newSVGElement = tf.getSVG();
-		assertEquals ("svg", newSVGElement.getName());
+		String newSVGElement = tf.getSVG();
+		assertEquals ("<svg/>", newSVGElement);
 	}
 
 	@Test

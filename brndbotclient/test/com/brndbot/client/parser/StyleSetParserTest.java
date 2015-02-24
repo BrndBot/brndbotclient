@@ -107,7 +107,7 @@ public class StyleSetParserTest {
 		assertEquals (svgs.getAnchor(), Style.Anchor.BOTTOM_RIGHT);
 		assertEquals (svgs.getOffsetX(), 40);
 		assertEquals (svgs.getOffsetY(), 30);
-		Element svg = svgs.getSVG();
+		String svg = svgs.getSVG();
 		assertNotNull (svg);
 	}
 
