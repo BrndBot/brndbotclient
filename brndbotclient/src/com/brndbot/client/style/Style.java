@@ -232,5 +232,8 @@ public abstract class Style implements Serializable {
 		obj.put ("offsetX", offsetX);
 		obj.put ("offsetY", offsetY);
 		obj.put ("anchor", anchor.toString());
+		obj.put ("dropShadowH", dropShadowH);
+		obj.put ("dropShadowV", dropShadowV);
+		obj.put ("dropShadowBlur", dropShadowBlur);
 	}
 }
