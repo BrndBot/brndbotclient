@@ -37,7 +37,7 @@ public class TextStyle extends Style {
 	private boolean bold;
 	private boolean dropShadow;
 	private Alignment alignment;
-	private String textColor;
+	private String color;
 	private String text;
 	private String defaultText;
 	
@@ -52,7 +52,7 @@ public class TextStyle extends Style {
 		bold = s.bold;
 		dropShadow = s.dropShadow;
 		alignment = s.alignment;
-		textColor = s.textColor;
+		color = s.color;
 		typeface = s.typeface;
 		pointSize = s.pointSize;
 	}
@@ -74,7 +74,7 @@ public class TextStyle extends Style {
 		val.put ("bold", bold);
 		val.put ("typeface", typeface);
 		val.put ("pointSize", pointSize);
-		val.put ("textColor", textColor);
+		val.put ("color", color);
 		val.put ("alignment", alignment.toString());
 		return val;				
 	}
@@ -132,12 +132,12 @@ public class TextStyle extends Style {
 		dropShadow = b;
 	}
 	
-	public String getTextColor () {
-		return textColor;
+	public String getColor () {
+		return color;
 	}
 	
-	public void setTextColor (String c) {
-		textColor = c;
+	public void setColor (String c) {
+		color = c;
 	}
 	
 	public Alignment getAlignment () {

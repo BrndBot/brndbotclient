@@ -245,7 +245,7 @@ public class StyleSetParser {
 
 		String color = textElem.getChildText("textcolor");
 		if (color != null)
-			ts.setTextColor (color);
+			ts.setColor (color);
 		
 		String typeface = textElem.getChildText("font");
 		if (typeface != null)
@@ -349,9 +349,19 @@ public class StyleSetParser {
 			String hstr = ds.getChildTextTrim("h");
 			String vstr = ds.getChildTextTrim("v");
 			String bstr = ds.getChildTextTrim("blur");
-			int h = Integer.parseInt(hstr);
-			int v = Integer.parseInt(vstr);
-			int blur = Integer.parseInt(bstr);
+			int h = 0;
+			try {
+				h = Integer.parseInt(hstr);
+			} catch (Exception e) {}
+			int v = 0;
+			try {
+				v = Integer.parseInt(vstr);
+			} catch (Exception e) {}
+				
+			int blur = 0;
+			try {
+				blur = Integer.parseInt(bstr);
+			} catch (Exception e) {}
 			return new DropShadow (h, v, blur);
 		} catch (Exception e) {
 			throw new ClientException (e);

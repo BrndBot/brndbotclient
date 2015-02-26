@@ -33,7 +33,7 @@ public class TextStyleTest {
 		assertTrue (ts.isItalic ());
 		assertTrue (ts.isBold());
 		assertTrue (ts.isDropShadow());
-		assertEquals ("#AA00BB", ts.getTextColor());
+		assertEquals ("#AA00BB", ts.getColor());
 		assertEquals (Alignment.RIGHT, ts.getAlignment());
 	}
 
@@ -54,7 +54,7 @@ public class TextStyleTest {
 		ts.setItalic(false);
 		ts.setBold(false);
 		ts.setDropShadow(false);
-		ts.setTextColor ("black");
+		ts.setColor ("black");
 		ts.setAlignment(Alignment.JUSTIFIED);
 		
 		// Make sure that didn't change the original
@@ -69,7 +69,7 @@ public class TextStyleTest {
 		assertTrue (txExample.isItalic ());
 		assertTrue (txExample.isBold());
 		assertTrue (txExample.isDropShadow());
-		assertEquals ("#AA00BB", txExample.getTextColor());
+		assertEquals ("#AA00BB", txExample.getColor());
 		assertEquals (Alignment.RIGHT, txExample.getAlignment());
 
 	}
@@ -90,7 +90,7 @@ public class TextStyleTest {
 		ts.setItalic (true);
 		ts.setBold (true);
 		ts.setDropShadow (true);
-		ts.setTextColor ("#AA00BB");
+		ts.setColor ("#AA00BB");
 		ts.setAlignment (Alignment.RIGHT);
 		return ts;
 	}
