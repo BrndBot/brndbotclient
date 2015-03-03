@@ -54,6 +54,26 @@ public class StyleSet implements Serializable {
 		}
 	}
 	
+	/** Check if the StyleSet has enough information to be usable. */
+	public boolean isValid () {
+		if (!(name != null &&
+				organization != null &&
+				width > 0 &&
+				height > 0 &&
+				styles != null &&
+				styles.size() > 0))
+			return false;				// lacks minimal fields
+		
+		// Make sure there's at least one valid style.
+		int validStyles = 0;
+		for (Style s : styles) {
+			if (s.isValid ())
+				++validStyles;
+		}
+		return (validStyles > 0);
+	}
+	
+	
 	public JSONObject toJSON () throws JSONException {
 		JSONObject val = new JSONObject();
 		val.put ("name", name);

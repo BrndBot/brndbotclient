@@ -79,29 +79,18 @@ public class StyleSetParser {
 			this.blur = b;
 		}
 		
-		public int getH () {
-			return h;
-		}
+//		public int getH () {
+//			return h;
+//		}
+//		
+//		public int getV () {
+//			return v;
+//		}
+//		
+//		public int getBlur () {
+//			return blur;
+//		}
 		
-		public void setH (int h) {
-			this.h = h;
-		}
-
-		public int getV () {
-			return v;
-		}
-		
-		public void setV (int v) {
-			this.v = v;
-		}
-
-		public int getBlur () {
-			return blur;
-		}
-		
-		public void setBlur (int b) {
-			this.blur = b;
-		}
 }
 	
 	private File styleSetFile;
@@ -148,7 +137,6 @@ public class StyleSetParser {
 			String fieldName = styleElem.getAttributeValue("field");
 			Element styleChild = styleElem.getChildren().get(0);
 			String styleName = styleChild.getName();
-			logger.debug ("parseStyles, styleName = {}", styleName);
 			switch (styleName) {
 			case "text":
 				addTextStyle (styleChild, ss, fieldName);
@@ -179,7 +167,6 @@ public class StyleSetParser {
 		s.setHeight((int) dim.getHeight());
 		
 		String anchorText = styleElem.getChildText("anchor");
-		logger.debug ("anchor = {}", anchorText);
 		Style.Anchor anchor = null;
 		switch (anchorText) {
 		case "tl":
@@ -229,10 +216,8 @@ public class StyleSetParser {
 		ts.setAlignment (align);
 		
 		Element ital = textElem.getChild("italic");
-		logger.debug ("Italic is {}", (ital != null ? "specified" : "not specified"));
 		ts.setItalic (ital != null);
 		Element bold = textElem.getChild("bold");
-		logger.debug ("Bold is {}", (bold != null ? "specified" : "not specified"));
 		ts.setBold (bold != null);
 		Element size = textElem.getChild("size");
 		int ptSize = 12;		// default if somehow missing or bad

@@ -106,6 +106,16 @@ public abstract class Style implements Serializable {
 	/** Returns the kind of Style this is */
 	public abstract StyleType getStyleType ();
 	
+	/** Checks if the style is valid for use with a model. This requires that it
+	 *  have a name and a style type. */
+	public boolean isValid () {
+		logger.debug ("isValid");
+		return (fieldName != null &&
+				width > 0 &&
+				height > 0 &&
+				anchor != null);
+	}
+	
 	/** Returns the name of the model field associated with this style.
 	 *  Will be null if there is no model associated with the style. 
 	 */
