@@ -38,6 +38,9 @@ public class ImageStyle extends Style {
 		putStandardJSONFields (val);
 		val.put ("imagePath", imagePath);
 		val.put ("imageID", imageID);
+		val.put ("opacity", getOpacity());
+		val.put ("multiply", getMultiply());
+			
 		logger.debug (val.toString());
 		return val;				
 	}

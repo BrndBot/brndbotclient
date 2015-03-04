@@ -32,6 +32,8 @@ public class BlockStyle extends Style {
 		putStandardJSONFields (val);
 		val.put ("color", color);
 		val.put ("paletteSelection", paletteSelection);
+		val.put ("opacity", getOpacity());
+		val.put ("multiply", getMultiply());
 		return val;				
 	}
 
