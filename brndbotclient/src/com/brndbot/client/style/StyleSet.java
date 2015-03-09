@@ -36,6 +36,7 @@ public class StyleSet implements Serializable {
 	public StyleSet (String name) {
 		this.name = name;
 		styles = new ArrayList<>();
+		logger.debug ("Constructing styleset {}", name);
 	}
 	
 	/** Copy constructor. Copies the individual styles, so they can
@@ -52,6 +53,7 @@ public class StyleSet implements Serializable {
 		for (Style styl : orig.styles) {
 			styles.add (copyStyle (styl));
 		}
+		logger.debug ("StyleSet copy {}", name);
 	}
 	
 	/** Check if the StyleSet has enough information to be usable. */
@@ -89,7 +91,7 @@ public class StyleSet implements Serializable {
 			jStyleArray.put (jStyle);
 		}
 		val.put ("styles", jStyleArray);
-		return val;		// TODO stub
+		return val;		
 	}
 	
 	public String getName () {
@@ -149,6 +151,7 @@ public class StyleSet implements Serializable {
 	}
 	
 	public void addStyle (Style s) {
+		logger.debug ("addStyle {}", s.toString());
 		styles.add (s);
 	}
 	

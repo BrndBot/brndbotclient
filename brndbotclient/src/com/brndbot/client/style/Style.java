@@ -97,6 +97,25 @@ public abstract class Style implements Serializable {
 		multiply = s.multiply;
 	}
 	
+	/** toString function, as a debugging aid */
+	@Override
+	public String toString () {
+		StringBuilder sb = new StringBuilder ("Style: ");
+		sb.append ("type = ");
+		sb.append (getStyleType());
+		sb.append ("   width = ");
+		sb.append (width);
+		sb.append ("   height = ");
+		sb.append (height);
+		sb.append ("   x = ");
+		sb.append (offsetX);
+		sb.append ("   y = ");
+		sb.append (offsetY);
+		sb.append ("   opacity = ");
+		sb.append (opacity);
+		return sb.toString();
+	}
+	
 	/** Convert this Style to a JSON object. Override this to do anything. */
 	public JSONObject toJSON () throws JSONException {
 		JSONObject val = new JSONObject ();
@@ -109,7 +128,6 @@ public abstract class Style implements Serializable {
 	/** Checks if the style is valid for use with a model. This requires that it
 	 *  have a name and a style type. */
 	public boolean isValid () {
-		logger.debug ("isValid");
 		return (fieldName != null &&
 				width > 0 &&
 				height > 0 &&
@@ -158,7 +176,6 @@ public abstract class Style implements Serializable {
 	}
 	
 	public void setAnchor (Anchor a) {
-		logger.debug ("setAnchor {}", a.toString());
 		anchor = a;
 	}
 	

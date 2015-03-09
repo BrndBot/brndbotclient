@@ -287,7 +287,6 @@ public class StyleSetParser {
 		}
 		String pal = blockElem.getChildText ("palette");
 		int palidx = paletteSelToIndex (pal);
-		logger.debug ("Palette {}", pal);
 		if (palidx < 0) {
 			String color = blockElem.getChildText ("blockcolor");
 			logger.debug ("Color {}", color);
@@ -298,6 +297,7 @@ public class StyleSetParser {
 			bs.setPaletteSelection (palidx);
 		}
 		Element multiply = blockElem.getChild("multiply");
+		logger.debug ("multiply for block: {}", multiply != null);
 		bs.setMultiply (multiply != null);
 		ss.addStyle (bs);
 	}
