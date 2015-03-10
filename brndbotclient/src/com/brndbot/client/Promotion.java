@@ -37,12 +37,17 @@ public class Promotion implements Serializable {
 	protected Model model;
 	protected StyleSet styleSet;
 	private List<ModelField> content;
+	
+	/* synthetic is true if this was constructed using default values
+	 * rather than with a real style set. */
+	private boolean synthetic;
 
 	/** Constructor. The StyleSet may be null. */
 	public Promotion (String n, Model m, StyleSet ss) {
 		name = n;
 		model = m;
 		styleSet = ss;
+		synthetic = false;
 		// Clone model content into the Promotion, doing a deep copy
 		Iterator<Style> styleIter = null;
 		content = new ArrayList<>();
@@ -91,6 +96,7 @@ public class Promotion implements Serializable {
 				break;
 			}
 		}
+		synthetic = true;
 	}
 	
 	public String getName () {
@@ -99,6 +105,12 @@ public class Promotion implements Serializable {
 	
 	public Model getModel () {
 		return model;
+	}
+	
+	/** Returns true if this was constructed from a model without a
+	 *  style set. */
+	public boolean isSynthetic () {
+		return synthetic;
 	}
 	
 	public StyleSet getStyleSet () {
@@ -112,6 +124,8 @@ public class Promotion implements Serializable {
 	public List<ModelField> getContent () {
 		return content;
 	}
+	
+	
 	
 	/** Locate a field with a given name */
 	public ModelField getNamedField (String name) {
