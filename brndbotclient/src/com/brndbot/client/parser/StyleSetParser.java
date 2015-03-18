@@ -79,17 +79,16 @@ public class StyleSetParser {
 			this.blur = b;
 		}
 		
-//		public int getH () {
-//			return h;
-//		}
-//		
-//		public int getV () {
-//			return v;
-//		}
-//		
-//		public int getBlur () {
-//			return blur;
-//		}
+		@Override
+		public String toString () {
+			StringBuilder sb = new StringBuilder ("DropShadow: h = ");
+			sb.append (Integer.toString(h));
+			sb.append ("    v = ");
+			sb.append (Integer.toString(v));
+			sb.append ("    blur = ");
+			sb.append (Integer.toString(blur));
+			return sb.toString();
+		}
 		
 }
 	
@@ -236,8 +235,9 @@ public class StyleSetParser {
 		if (typeface != null)
 			ts.setTypeface(typeface);
 		
-		DropShadow ds = parseDropShadow ("dropShadow", textElem);
+		DropShadow ds = parseDropShadow ("dropshadow", textElem);
 		if (ds != null) {
+			logger.debug ("Parsed drop shadow: " + ds);
 			ts.setDropShadowH(ds.h);
 			ts.setDropShadowV(ds.v);
 			ts.setDropShadowBlur(ds.blur);
