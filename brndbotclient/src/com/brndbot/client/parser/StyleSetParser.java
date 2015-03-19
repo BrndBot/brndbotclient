@@ -188,6 +188,9 @@ public class StyleSetParser {
 		Dimension offset = parseDimensions("offset", styleElem);
 		s.setOffsetX (offset.getX());
 		s.setOffsetY (offset.getY());
+		
+		Element hCenter = styleElem.getChild("hCenter");
+		s.setHCenter (hCenter != null);
 	}
 	
 	private void addTextStyle (Element textElem, StyleSet ss, String fieldName) throws ClientException {
@@ -237,7 +240,6 @@ public class StyleSetParser {
 		
 		DropShadow ds = parseDropShadow ("dropshadow", textElem);
 		if (ds != null) {
-			logger.debug ("Parsed drop shadow: " + ds);
 			ts.setDropShadowH(ds.h);
 			ts.setDropShadowV(ds.v);
 			ts.setDropShadowBlur(ds.blur);
@@ -299,6 +301,12 @@ public class StyleSetParser {
 		Element multiply = blockElem.getChild("multiply");
 		logger.debug ("multiply for block: {}", multiply != null);
 		bs.setMultiply (multiply != null);
+		DropShadow ds = parseDropShadow ("dropshadow", blockElem);
+		if (ds != null) {
+			bs.setDropShadowH(ds.h);
+			bs.setDropShadowV(ds.v);
+			bs.setDropShadowBlur(ds.blur);
+		}
 		ss.addStyle (bs);
 	}
 

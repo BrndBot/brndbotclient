@@ -63,6 +63,7 @@ public abstract class Style implements Serializable {
 	private Anchor anchor;
 	private int offsetX;
 	private int offsetY;
+	private boolean hCenter;
 	
 	/* Some styles but not all support drop shadow. We make it available to all
 	 * just because it's easier.
@@ -95,6 +96,7 @@ public abstract class Style implements Serializable {
 		dropShadowBlur = s.dropShadowBlur;
 		opacity = s.opacity;
 		multiply = s.multiply;
+		hCenter = s.hCenter;
 	}
 	
 	/** toString function, as a debugging aid */
@@ -113,6 +115,8 @@ public abstract class Style implements Serializable {
 		sb.append (offsetY);
 		sb.append ("   opacity = ");
 		sb.append (opacity);
+		sb.append ("   hCenter = ");
+		sb.append (Boolean.toString (hCenter));
 		return sb.toString();
 	}
 	
@@ -160,6 +164,14 @@ public abstract class Style implements Serializable {
 	
 	public void setWidth (int w) {
 		width = w;
+	}
+	
+	public boolean isHCenter () {
+		return hCenter;
+	}
+	
+	public void setHCenter (boolean b) {
+		hCenter = b;
 	}
 	
 	public int getHeight () {
@@ -262,5 +274,6 @@ public abstract class Style implements Serializable {
 		obj.put ("dropShadowH", dropShadowH);
 		obj.put ("dropShadowV", dropShadowV);
 		obj.put ("dropShadowBlur", dropShadowBlur);
+		obj.put ("hCenter", hCenter);
 	}
 }
