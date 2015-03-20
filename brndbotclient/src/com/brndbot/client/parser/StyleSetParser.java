@@ -191,6 +191,19 @@ public class StyleSetParser {
 		
 		Element hCenter = styleElem.getChild("hCenter");
 		s.setHCenter (hCenter != null);
+		
+		String pal = styleElem.getChildText ("palette");
+		int palidx = paletteSelToIndex (pal);
+		if (palidx < 0) {
+			String color = styleElem.getChildText ("blockcolor");
+			logger.debug ("Color {}", color);
+			if (color != null)
+				s.setColor (color);
+		}
+		else {
+			s.setPaletteSelection (palidx);
+		}
+
 	}
 	
 	private void addTextStyle (Element textElem, StyleSet ss, String fieldName) throws ClientException {
@@ -286,17 +299,6 @@ public class StyleSetParser {
 			try {
 				bs.setOpacity (Integer.parseInt(opacityString));
 			} catch (Exception e) {}
-		}
-		String pal = blockElem.getChildText ("palette");
-		int palidx = paletteSelToIndex (pal);
-		if (palidx < 0) {
-			String color = blockElem.getChildText ("blockcolor");
-			logger.debug ("Color {}", color);
-			if (color != null)
-				bs.setColor (color);
-		}
-		else {
-			bs.setPaletteSelection (palidx);
 		}
 		Element multiply = blockElem.getChild("multiply");
 		logger.debug ("multiply for block: {}", multiply != null);

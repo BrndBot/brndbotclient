@@ -64,7 +64,10 @@ public abstract class Style implements Serializable {
 	private int offsetX;
 	private int offsetY;
 	private boolean hCenter;
+	private int paletteSelection = -1;
+	private String color;
 	
+
 	/* Some styles but not all support drop shadow. We make it available to all
 	 * just because it's easier.
 	 */
@@ -94,6 +97,8 @@ public abstract class Style implements Serializable {
 		dropShadowH = s.dropShadowH;
 		dropShadowV = s.dropShadowV;
 		dropShadowBlur = s.dropShadowBlur;
+		paletteSelection = s.paletteSelection;
+		color = s.color;
 		opacity = s.opacity;
 		multiply = s.multiply;
 		hCenter = s.hCenter;
@@ -123,7 +128,7 @@ public abstract class Style implements Serializable {
 	/** Convert this Style to a JSON object. Override this to do anything. */
 	public JSONObject toJSON () throws JSONException {
 		JSONObject val = new JSONObject ();
-		return val;				// TODO stub
+		return val;				
 	}
 	
 	/** Returns the kind of Style this is */
@@ -259,6 +264,31 @@ public abstract class Style implements Serializable {
 	public void setMultiply (boolean m) {
 		multiply = m;
 	}
+
+
+	public String getColor () {
+		return color;
+	}
+	
+	/** We don't do any checking when setting the color. It should
+	 *  be a valid CSS color expression. */
+	public void setColor(String c) {
+		color = c;
+	}
+	
+	/** Get the 1-based palette selection. Use getColor only if
+	 *  this returns null.
+	 */
+	public int getPaletteSelection () {
+		return paletteSelection;
+	}
+	
+	/** Set the 1-based palette selection. Color and palette selection
+	 *  shouldn't both be set.
+	 */
+	public void setPaletteSelection (int n) {
+		paletteSelection = n;
+	}
 	
 	/** Fill out standard fields in a JSON object */
 	public void putStandardJSONFields (JSONObject obj) throws JSONException {
@@ -270,6 +300,9 @@ public abstract class Style implements Serializable {
 		obj.put ("height", height);
 		obj.put ("offsetX", offsetX);
 		obj.put ("offsetY", offsetY);
+		obj.put ("color", color);
+		if (paletteSelection > 0)
+			obj.put ("paletteSelection", paletteSelection);
 		obj.put ("anchor", anchor.toString());
 		obj.put ("dropShadowH", dropShadowH);
 		obj.put ("dropShadowV", dropShadowV);
