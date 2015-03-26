@@ -316,6 +316,12 @@ public class StyleSetParser {
 		LogoStyle ls = new LogoStyle();
 		ls.setFieldName (fieldName);
 		getCommonElements (logoElem, ls);
+		DropShadow ds = parseDropShadow ("dropshadow", logoElem);
+		if (ds != null) {
+			ls.setDropShadowH(ds.h);
+			ls.setDropShadowV(ds.v);
+			ls.setDropShadowBlur(ds.blur);
+		}
 		ss.addStyle (ls);
 	}
 
