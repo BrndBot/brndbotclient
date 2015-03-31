@@ -117,6 +117,7 @@ public class StyleSetParser {
 			ss.setOrganization (root.getChildTextTrim("org"));
 			ss.setModel (root.getChildTextTrim("model"));
 			ss.setBrand (root.getChildTextTrim("brand"));
+			ss.setChannel (root.getChildTextTrim("channel"));
 			ss.setPromotion (root.getChildTextTrim("promo"));
 			List<Element> styles = root.getChildren ("style");
 			parseStyles (styles, ss);

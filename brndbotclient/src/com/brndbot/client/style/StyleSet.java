@@ -28,6 +28,7 @@ public class StyleSet implements Serializable {
 	private String model;
 	private String organization;
 	private String brand;
+	private String channel;
 	private String promotion;
 	private int width;
 	private int height;
@@ -46,6 +47,7 @@ public class StyleSet implements Serializable {
 		model = orig.model;
 		organization = orig.organization;
 		brand = orig.brand;
+		channel = orig.channel;
 		promotion = orig.promotion;
 		width = orig.width;
 		height = orig.height;
@@ -82,6 +84,11 @@ public class StyleSet implements Serializable {
 		val.put ("model", model);
 		val.put ("organization", organization);
 		val.put ("brand", brand);
+		// ****TEMPORARY If no channel, set a default
+		if (channel == null)
+			val.put ("channel", "Twitter");		// TODO remove when styles have real channel elements
+		else
+			val.put ("channel", channel);
 		val.put ("width", width);
 		val.put ("height", height);
 		JSONArray jStyleArray = new JSONArray ();
@@ -120,6 +127,14 @@ public class StyleSet implements Serializable {
 	
 	public void setBrand (String brnd) {
 		brand = brnd;
+	}
+	
+	public String getChannel () {
+		return channel;
+	}
+	
+	public void setChannel (String ch) {
+		channel = ch;
 	}
 	
 	public String getPromotion () {
