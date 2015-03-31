@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.brndbot.client.style.Style;
 import com.brndbot.client.style.Style.StyleType;
-import com.brndbot.client.style.StyleSet;
 
 /** A ModelField is (logically enough) a field of a Model. It 
  *  has a name and type. ModelField can be used on its own but

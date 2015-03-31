@@ -1,6 +1,5 @@
 package com.brndbot.client.style;
 
-import org.jdom2.Element;
 import org.json.JSONException;
 import org.json.JSONObject;
 
