@@ -117,7 +117,11 @@ public class StyleSetParser {
 			ss.setOrganization (root.getChildTextTrim("org"));
 			ss.setModel (root.getChildTextTrim("model"));
 			ss.setBrand (root.getChildTextTrim("brand"));
-			ss.setChannel (root.getChildTextTrim("channel"));
+			// No quite -- need to get all children that match
+			List<Element> channels = root.getChildren ("channel");
+			for (Element channel : channels) {
+				ss.addChannel (channel.getTextTrim());
+			}
 			ss.setPromotion (root.getChildTextTrim("promo"));
 			List<Element> styles = root.getChildren ("style");
 			parseStyles (styles, ss);

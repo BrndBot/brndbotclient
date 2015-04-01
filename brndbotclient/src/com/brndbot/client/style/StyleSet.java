@@ -7,7 +7,9 @@ package com.brndbot.client.style;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +30,7 @@ public class StyleSet implements Serializable {
 	private String model;
 	private String organization;
 	private String brand;
-	private String channel;
+	private Set<String> channels;
 	private String promotion;
 	private int width;
 	private int height;
@@ -36,8 +38,10 @@ public class StyleSet implements Serializable {
 	
 	public StyleSet (String name) {
 		this.name = name;
-		styles = new ArrayList<>();
 		logger.debug ("Constructing styleset {}", name);
+		styles = new ArrayList<>();
+		logger.debug ("StyleSet constructor for {} creating channels", name);
+		channels = new HashSet<>();
 	}
 	
 	/** Copy constructor. Copies the individual styles, so they can
@@ -47,7 +51,8 @@ public class StyleSet implements Serializable {
 		model = orig.model;
 		organization = orig.organization;
 		brand = orig.brand;
-		channel = orig.channel;
+		logger.debug ("StyleSet copy constructor for {} creating channels", name);
+		channels = new HashSet<> (orig.channels);
 		promotion = orig.promotion;
 		width = orig.width;
 		height = orig.height;
@@ -55,7 +60,6 @@ public class StyleSet implements Serializable {
 		for (Style styl : orig.styles) {
 			styles.add (copyStyle (styl));
 		}
-		logger.debug ("StyleSet copy {}", name);
 	}
 	
 	/** Check if the StyleSet has enough information to be usable. */
@@ -85,15 +89,16 @@ public class StyleSet implements Serializable {
 		val.put ("organization", organization);
 		val.put ("brand", brand);
 		// ****TEMPORARY If no channel, set a default
-		if (channel == null)
+		if (channels.isEmpty())
 			val.put ("channel", "Twitter");		// TODO remove when styles have real channel elements
-		else
-			val.put ("channel", channel);
+		else {
+			for (String channel : channels)
+				val.put ("channel", channel);
+		}
 		val.put ("width", width);
 		val.put ("height", height);
 		JSONArray jStyleArray = new JSONArray ();
 		for (Style style : styles) {
-			logger.debug ("toJSON: Adding style of type " + style.getStyleType());
 			JSONObject jStyle = style.toJSON();
 			jStyleArray.put (jStyle);
 		}
@@ -129,12 +134,13 @@ public class StyleSet implements Serializable {
 		brand = brnd;
 	}
 	
-	public String getChannel () {
-		return channel;
+	public Set<String> getChannels () {
+		return channels;
 	}
 	
-	public void setChannel (String ch) {
-		channel = ch;
+	public void addChannel (String ch) {
+		logger.debug ("Adding channel {}", ch);
+		channels.add(ch);
 	}
 	
 	public String getPromotion () {
@@ -166,7 +172,6 @@ public class StyleSet implements Serializable {
 	}
 	
 	public void addStyle (Style s) {
-		logger.debug ("addStyle {}", s.toString());
 		styles.add (s);
 	}
 	
