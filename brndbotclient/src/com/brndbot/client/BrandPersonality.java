@@ -9,32 +9,43 @@ import org.slf4j.LoggerFactory;
 
 import com.brndbot.client.style.StyleSet;
 
-/** A BrandIdentity is a set of Promotion prototypes. One organization
+/** A BrandPersonality is a set of Promotion prototypes. One organization
  *  can have multiple brand identities. 
  *  
  *  Styles are not part of a model, but rather are part of a brand
- *  identity and associated with a model. They're stored here 
+ *  personality and associated with a model. They're stored here 
  *  grouped by model name.
  */
-public class BrandIdentity implements Serializable {
+public class BrandPersonality implements Serializable {
 
-	final static Logger logger = LoggerFactory.getLogger(BrandIdentity.class);
+	final static Logger logger = LoggerFactory.getLogger(BrandPersonality.class);
 	
 	private static final long serialVersionUID = 1L;
 	
+	int id;			// ID of the brand personality in the database
 	/* Map keyed by model name to map keyed by styleset name of stylesets */
 	private Map<String, Map<String, StyleSet>> styleSetMap;
-//	private Map<String, Promotion> promotions;
 	private String name;
 	
-	public BrandIdentity(String name) {
-		this.name = name;
-//		promotions = new HashMap<>();
+	public BrandPersonality(int id) {
+		this.id = id;
+		styleSetMap = new HashMap<>();
+	}
+	
+	/** No-argument constructor. We use this to create a dummy
+	 *  BrandPersonality if we can't get a real one. */
+	public BrandPersonality () {
+		this.id = 0;
+		this.name = "empty";
 		styleSetMap = new HashMap<>();
 	}
 	
 	public String getName () {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public Map<String, StyleSet> getStyleSetsForModel (String modelName) {
