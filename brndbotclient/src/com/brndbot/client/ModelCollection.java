@@ -69,6 +69,27 @@ public class ModelCollection {
 		return catList;
 	}
 	
+	@Override
+	public String toString () {
+		StringBuilder sb = new StringBuilder ("ModelCollection: ");
+		if (categories != null) {
+			sb.append ("no. of categories = ");
+			sb.append (Integer.toString (categories.size()));
+		}
+		else {
+			sb.append ("categories = null");
+		}
+		if (models != null) {
+			sb.append ("  no. of models = ");
+			sb.append (Integer.toString (models.size()));
+		}
+		else {
+			sb.append ("  models = null");
+		}
+		
+		return sb.toString();
+	}
+	
 //	/** Get all models as an alphabetic list. */
 //	public List<Model> getModels () {
 //		List<Model> modelList = new ArrayList<>(models.values());

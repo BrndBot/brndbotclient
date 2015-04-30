@@ -174,6 +174,30 @@ public class StyleSet implements Serializable {
 	public void addStyle (Style s) {
 		styles.add (s);
 	}
+
+	@Override
+	public String toString () {
+		StringBuilder sb = new StringBuilder ("StyleSet: ");
+		sb.append("name = ");
+		sb.append(name);
+		sb.append ("  model = ");
+		sb.append(model);
+		sb.append("  organization = ");
+		sb.append(organization);
+		sb.append("  brand = ");
+		sb.append(brand);
+		if (channels != null) {
+			sb.append("  no. of channels = ");
+			sb.append(channels.size());
+		}
+		sb.append("  width = ");
+		sb.append(Integer.toString(width));
+		sb.append("  height = ");
+		sb.append(Integer.toString(height));
+		
+		return sb.toString();
+	}
+	
 	
 	/* Copy a Style as part of the copy constructor's action */
 	private Style copyStyle (Style s) {

@@ -3,6 +3,7 @@ package com.brndbot.client;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ public class BrandPersonality implements Serializable {
 	private String name;
 	
 	public BrandPersonality(int id) {
+		logger.debug("Creating BrandPersonality with id = {}", id);
 		this.id = id;
 		styleSetMap = new HashMap<>();
 	}
@@ -35,9 +37,15 @@ public class BrandPersonality implements Serializable {
 	/** No-argument constructor. We use this to create a dummy
 	 *  BrandPersonality if we can't get a real one. */
 	public BrandPersonality () {
+		logger.debug("Creating dummy BrandPersonality");
 		this.id = 0;
 		this.name = "empty";
 		styleSetMap = new HashMap<>();
+	}
+	
+	/** Return true if this was set up as a dummy brand personality */
+	public boolean isDummy() {
+		return (id == 0);
 	}
 	
 	public String getName () {
@@ -50,6 +58,7 @@ public class BrandPersonality implements Serializable {
 	
 	public Map<String, StyleSet> getStyleSetsForModel (String modelName) {
 		logger.debug ("getStyleSetsForModel {}", modelName);
+//		dumpStyleSetMap();
 		return styleSetMap.get(modelName);
 	}
 	
@@ -61,13 +70,45 @@ public class BrandPersonality implements Serializable {
 		Map<String, StyleSet> smap = styleSetMap.get(modelName);
 		if (smap == null) {
 			smap = new HashMap<>();
-			logger.debug ("Adding hashmap for model {}", modelName);
 			styleSetMap.put (modelName, smap);
 		}
-		logger.debug ("Adding styleset {}", styleSet);
+//		dumpStyleSetMap();
 		smap.put (styleSet.getName(), styleSet);
 	}
 
+	/** toString function as a debugging aid */
+	@Override
+	public String toString () {
+		StringBuilder sb = new StringBuilder ("BrandPersonality: ");
+		sb.append ("name = ");
+		sb.append (name);
+		sb.append ("    id = ");
+		sb.append (id);
+		if (styleSetMap != null) {
+			sb.append ("styleSetMap size = ");
+			sb.append (Integer.toString (styleSetMap.size()));
+		}
+		return sb.toString();
+	}
+	
+	/* For debugging */
+	@SuppressWarnings("unused")
+	private void dumpStyleSetMap () {
+		logger.debug ("Dumping styleSetMap");
+		if (styleSetMap == null) {
+			logger.debug ("StyleSetMap is null");
+			return;
+		}
+		Set<String> keys = styleSetMap.keySet();
+		for (String key : keys) {
+			logger.debug ("key = {}", key);
+			Map<String, StyleSet> val = styleSetMap.get(key);
+			Set<String> sskeys = val.keySet();
+			for (String sskey : sskeys) {
+				logger.debug ("Style set key = {}", sskey);
+			}
+		}
+	}
 //	public void addPromotion (Promotion p) {
 //		String name = p.getName();
 //		promotions.put (name, p);
