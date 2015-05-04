@@ -170,7 +170,7 @@ public class StyleSetParser {
 		s.setWidth((int) dim.getWidth());
 		s.setHeight((int) dim.getHeight());
 		
-		String anchorText = styleElem.getChildText("anchor");
+		String anchorText = styleElem.getChildTextTrim("anchor");
 		Style.Anchor anchor = null;
 		switch (anchorText) {
 		case "tl":
@@ -197,10 +197,10 @@ public class StyleSetParser {
 		Element hCenter = styleElem.getChild("hCenter");
 		s.setHCenter (hCenter != null);
 		
-		String pal = styleElem.getChildText ("palette");
+		String pal = styleElem.getChildTextTrim ("palette");
 		int palidx = paletteSelToIndex (pal);
 		if (palidx < 0) {
-			String color = styleElem.getChildText ("blockcolor");
+			String color = styleElem.getChildTextTrim ("blockcolor");
 			logger.debug ("Color {}", color);
 			if (color != null)
 				s.setColor (color);
@@ -217,7 +217,7 @@ public class StyleSetParser {
 		ts.setFieldName (fieldName);
 		getCommonElements (textElem, ts);
 		
-		String alignText = textElem.getChildText("alignment");
+		String alignText = textElem.getChildTextTrim("alignment");
 		TextStyle.Alignment align = null;
 		switch (alignText) {
 		case "left":
@@ -248,11 +248,11 @@ public class StyleSetParser {
 		}
 		ts.setPointSize(ptSize);
 
-		String color = textElem.getChildText("textcolor");
+		String color = textElem.getChildTextTrim("textcolor");
 		if (color != null)
 			ts.setColor (color);
 		
-		String typeface = textElem.getChildText("font");
+		String typeface = textElem.getChildTextTrim("font");
 		if (typeface != null)
 			ts.setTypeface(typeface);
 		
@@ -262,7 +262,7 @@ public class StyleSetParser {
 			ts.setDropShadowV(ds.v);
 			ts.setDropShadowBlur(ds.blur);
 		}
-		String defaultText = textElem.getChildText ("default");
+		String defaultText = textElem.getChildTextTrim ("default");
 		ts.setDefaultText (defaultText);
 
 		ss.addStyle (ts);
@@ -272,8 +272,8 @@ public class StyleSetParser {
 		ImageStyle is = new ImageStyle();
 		is.setFieldName (fieldName);
 		getCommonElements (imageElem, is);
-		is.setImagePath(imageElem.getChildText("imagepath"));
-		is.setOpacity (Integer.parseInt(imageElem.getChildText("opacity")));
+		is.setImagePath(imageElem.getChildTextTrim("imagepath"));
+		is.setOpacity (Integer.parseInt(imageElem.getChildTextTrim("opacity")));
 		Element multiply = imageElem.getChild("multiply");
 		is.setMultiply (multiply != null);
 		ss.addStyle (is);
@@ -299,7 +299,7 @@ public class StyleSetParser {
 		BlockStyle bs = new BlockStyle();
 		bs.setFieldName (fieldName);
 		getCommonElements (blockElem, bs);
-		String opacityString = blockElem.getChildText("opacity");
+		String opacityString = blockElem.getChildTextTrim("opacity");
 		if (opacityString != null) {
 			try {
 				bs.setOpacity (Integer.parseInt(opacityString));
